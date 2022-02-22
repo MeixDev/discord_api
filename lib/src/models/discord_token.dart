@@ -28,12 +28,12 @@ class DiscordToken {
   bool get isValid => expiresAt.isAfter(DateTime.now());
 
   factory DiscordToken.fromJson(Map<String, dynamic> json) => DiscordToken(
-    accessToken: json[accessTokenEntry],
-    refreshToken: json[refreshTokenEntry],
-    scope: json[scopeEntry],
-    tokenType: json[tokenTypeEntry],
-    expiresIn: json[expiresInEntry],
-  );
+        accessToken: json[accessTokenEntry] as String,
+        refreshToken: json[refreshTokenEntry] as String,
+        scope: json[scopeEntry] as String,
+        tokenType: json[tokenTypeEntry] as String,
+        expiresIn: json[expiresInEntry] as int,
+      );
 
   DiscordToken copyWith({
     String? accessToken,

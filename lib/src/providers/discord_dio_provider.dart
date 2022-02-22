@@ -105,6 +105,35 @@ class DiscordDioProvider extends DiscordHttpClient {
   }
 
   @override
+  Future<T> putCall<T>(
+    Iterable<String> pathSegments,
+    dynamic data, {
+    Map<String, dynamic> queryParameters = const {},
+  }) async {
+    final token = await validateToken();
+    final options = Options(
+      contentType: Headers.jsonContentType,
+      headers: {
+        'Client-Id': clientId,
+        'Authorization': 'Bearer ${token.accessToken}',
+      },
+    );
+    final response = await dio.putUri<T>(
+      DiscordClient.baseUrl.replace(
+        pathSegments: <String>[
+          DiscordClient.apiPath,
+          DiscordClient.versionPath,
+          ...pathSegments
+        ],
+        queryParameters: queryParameters,
+      ),
+      options: options,
+      data: data,
+    );
+    return response.data!;
+  }
+
+  @override
   void initializeToken(DiscordToken discordToken) =>
       _discordToken = discordToken;
 

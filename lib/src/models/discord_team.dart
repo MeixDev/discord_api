@@ -1,13 +1,14 @@
+import 'package:discord_api/src/models/discord_snowflake.dart';
+
 import 'discord_team_member.dart';
 
 class DiscordTeam {
-  /// This is a Discord snowflake representing the team.
-  final String id;
+  final DiscordSnowflake id;
 
   final String? icon;
   final List<DiscordTeamMember>? members;
   final String name;
-  final String ownerUserId; // This is a snowflake too.
+  final DiscordSnowflake ownerUserId;
 
   static const idEntry = 'id';
   static const iconEntry = 'icon';
@@ -24,13 +25,13 @@ class DiscordTeam {
   });
 
   factory DiscordTeam.fromJson(Map<String, dynamic> json) => DiscordTeam(
-        id: json[idEntry] as String,
+        id: DiscordSnowflake(json[idEntry]),
         icon: json[iconEntry] as String?,
         members: (json[membersEntry] as Iterable?)
             ?.cast<Map<String, dynamic>>()
             .map(DiscordTeamMember.fromJson)
             .toList(),
         name: json[nameEntry] as String,
-        ownerUserId: json[ownerUserIdEntry] as String,
+        ownerUserId: DiscordSnowflake(json[ownerUserIdEntry]),
       );
 }

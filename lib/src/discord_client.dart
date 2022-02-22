@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:discord_api/src/exceptions/discord_api_exceptions.dart';
+
 import 'models/discord_api_scope.dart';
+import 'models/discord_authorization_information.dart';
 import 'models/discord_token.dart';
 import 'providers/discord_http_client.dart';
 
@@ -76,7 +79,12 @@ class DiscordClient {
 
   Future<DiscordAuthorizationInformation>
       getCurrentAuthorizationInformation() async {
-    final data = await discordHttpClient
-        .getCall([apiPath, versionPath, oauth2Path, '@me']);
+    try {
+      final data = await discordHttpClient
+          .getCall([apiPath, versionPath, oauth2Path, '@me']);
+      return DiscordAuthorizationInformation.fromJson(data);
+    } catch (e) {
+      throw DiscordApiException(e.toString());
+    }
   }
 }

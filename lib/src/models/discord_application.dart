@@ -1,9 +1,11 @@
+import 'package:discord_api/src/models/discord_application_flag.dart';
+import 'package:discord_api/src/models/discord_snowflake.dart';
+
 import 'discord_team.dart';
 import 'discord_user.dart';
 
 class DiscordApplication {
-  /// The id of the application as a Discord snowflake.
-  final String id;
+  final DiscordSnowflake id;
 
   final String name;
   final String? icon;
@@ -18,11 +20,12 @@ class DiscordApplication {
   final String summary;
   final String verifyKey;
   final DiscordTeam? team;
-  final String? guildId; // This is a snowflake too.
-  final String? primarySkuId; // This is a snowflake too.
+  final DiscordSnowflake? guildId;
+  final DiscordSnowflake? primarySkuId;
   final String? slug;
   final String? coverImage;
   final int? flags;
+  late final List<DiscordApplicationFlag>? _flagsAsEnum;
 
   static const idEntry = 'id';
   static const nameEntry = 'name';
@@ -64,9 +67,41 @@ class DiscordApplication {
     this.flags,
   });
 
+  void _addFlagAsEnum(String r, int index, DiscordApplicationFlag flag) {
+    if (r.length >= index + 1 && r.substring(index, index + 1) == '1') {
+      _flagsAsEnum!.add(flag);
+    }
+  }
+
+  List<DiscordApplicationFlag> get flagsAsEnum {
+    if (flags == null) {
+      return <DiscordApplicationFlag>[];
+    }
+    if (_flagsAsEnum != null) {
+      return _flagsAsEnum!;
+    }
+    _flagsAsEnum = <DiscordApplicationFlag>[];
+    final radixString =
+        String.fromCharCodes(flags!.toRadixString(2).runes.toList().reversed);
+    _addFlagAsEnum(radixString, 12, DiscordApplicationFlag.gatewayPresence);
+    _addFlagAsEnum(
+        radixString, 13, DiscordApplicationFlag.gatewayPresenceLimited);
+    _addFlagAsEnum(radixString, 14, DiscordApplicationFlag.gatewayGuildMembers);
+    _addFlagAsEnum(
+        radixString, 15, DiscordApplicationFlag.gatewayGuildMembersLimited);
+    _addFlagAsEnum(
+        radixString, 16, DiscordApplicationFlag.verificationPendingGuildLimit);
+    _addFlagAsEnum(radixString, 17, DiscordApplicationFlag.embedded);
+    _addFlagAsEnum(
+        radixString, 18, DiscordApplicationFlag.gatewayMessageContent);
+    _addFlagAsEnum(
+        radixString, 19, DiscordApplicationFlag.gatewayMessageContentLimited);
+    return _flagsAsEnum!;
+  }
+
   factory DiscordApplication.fromJson(Map<String, dynamic> json) =>
       DiscordApplication(
-        id: json[idEntry] as String,
+        id: DiscordSnowflake(json[idEntry]),
         name: json[nameEntry] as String,
         icon: json[iconEntry] as String?,
         description: json[descriptionEntry] as String,
@@ -83,8 +118,12 @@ class DiscordApplication {
         team: json[teamEntry] != null
             ? DiscordTeam.fromJson(json[teamEntry])
             : null,
-        guildId: json[guildIdEntry] as String?,
-        primarySkuId: json[primarySkuIdEntry] as String?,
+        guildId: json[guildIdEntry] != null
+            ? DiscordSnowflake(json[guildIdEntry])
+            : null,
+        primarySkuId: json[primarySkuIdEntry] != null
+            ? DiscordSnowflake(json[primarySkuIdEntry])
+            : null,
         slug: json[slugEntry] as String?,
         coverImage: json[coverImageEntry] as String?,
         flags: json[flagsEntry] as int?,

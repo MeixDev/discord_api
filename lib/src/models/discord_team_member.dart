@@ -1,11 +1,12 @@
 import 'package:discord_api/src/models/discord_membership_state.dart';
+import 'package:discord_api/src/models/discord_snowflake.dart';
 import 'package:discord_api/src/models/discord_user.dart';
 
 class DiscordTeamMember {
   final int membershipState;
   late final DiscordMembershipState? _membershipStateAsEnum;
   final List<String> permissions; // will always be ["*"]
-  final String teamId; // is a Snowflake
+  final DiscordSnowflake teamId;
   final DiscordUser
       user; // partial, only avatar, discriminator, id and username
 
@@ -26,9 +27,9 @@ class DiscordTeamMember {
 
   factory DiscordTeamMember.fromJson(Map<String, dynamic> json) =>
       DiscordTeamMember(
-        membershipState: json[membershipStateEntry],
+        membershipState: json[membershipStateEntry] as int,
         permissions: List<String>.from(json[permissionsEntry]),
-        teamId: json[teamIdEntry],
+        teamId: DiscordSnowflake(json[teamIdEntry]),
         user: DiscordUser.fromJson(json[userEntry]),
       );
 }

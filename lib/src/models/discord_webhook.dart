@@ -1,13 +1,15 @@
+import 'package:discord_api/src/models/discord_snowflake.dart';
+
 class DiscordWebhook {
-  final String applicationId;
+  final DiscordSnowflake applicationId;
   final String name;
   final String url;
-  final String channelId;
+  final DiscordSnowflake channelId;
   final String token;
   final int type;
   final String? avatar;
-  final String guildId;
-  final String id;
+  final DiscordSnowflake guildId;
+  final DiscordSnowflake id;
 
   static const applicationIdEntry = 'application_id';
   static const nameEntry = 'name';
