@@ -1,4 +1,4 @@
-import 'package:discord_api/src/models/discord_snowflake.dart';
+import 'discord_snowflake.dart';
 
 class DiscordOverwrite {
   final DiscordSnowflake id;
@@ -26,7 +26,7 @@ class DiscordOverwrite {
 
   factory DiscordOverwrite.fromJson(Map<String, dynamic> json) =>
       DiscordOverwrite(
-        id: DiscordSnowflake(json[idEntry]),
+        id: DiscordSnowflake(json[idEntry] as String),
         type: json[typeEntry] as int,
         allow: json[allowEntry] as String,
         deny: json[denyEntry] as String,

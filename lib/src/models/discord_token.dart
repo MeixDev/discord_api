@@ -1,3 +1,5 @@
+import 'discord_token_webhook.dart';
+
 class DiscordToken {
   final String accessToken;
   final String refreshToken;
@@ -6,12 +8,14 @@ class DiscordToken {
   late final List<String>? scopes;
   final int expiresIn;
   late final DateTime expiresAt;
+  final DiscordTokenWebhook? webhook;
 
   static const accessTokenEntry = 'access_token';
   static const tokenTypeEntry = 'token_type';
   static const refreshTokenEntry = 'refresh_token';
   static const scopeEntry = 'scope';
   static const expiresInEntry = 'expires_in';
+  static const webhookEntry = 'webhook';
 
   DiscordToken({
     required this.accessToken,
@@ -19,6 +23,7 @@ class DiscordToken {
     required this.scope,
     required this.tokenType,
     required this.expiresIn,
+    this.webhook,
   }) {
     scopes = scope.split(' ');
     // Removing 60 seconds as a sanity check.
@@ -33,6 +38,8 @@ class DiscordToken {
         scope: json[scopeEntry] as String,
         tokenType: json[tokenTypeEntry] as String,
         expiresIn: json[expiresInEntry] as int,
+        webhook: DiscordTokenWebhook.fromJson(
+            json[webhookEntry] as Map<String, dynamic>),
       );
 
   DiscordToken copyWith({
@@ -41,6 +48,7 @@ class DiscordToken {
     String? scope,
     String? tokenType,
     int? expiresIn,
+    DiscordTokenWebhook? webhook,
   }) =>
       DiscordToken(
         accessToken: accessToken ?? this.accessToken,
@@ -48,5 +56,6 @@ class DiscordToken {
         scope: scope ?? this.scope,
         tokenType: tokenType ?? this.tokenType,
         expiresIn: expiresIn ?? this.expiresIn,
+        webhook: webhook ?? this.webhook,
       );
 }

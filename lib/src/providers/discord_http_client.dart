@@ -1,5 +1,3 @@
-import 'package:discord_api/src/models/discord_token.dart';
-
 import '../models/discord_token.dart';
 
 abstract class DiscordHttpClient {

@@ -1,4 +1,4 @@
-import 'package:discord_api/src/models/discord_snowflake.dart';
+import 'discord_snowflake.dart';
 
 class DiscordThreadMember {
   final DiscordSnowflake? id;
@@ -26,9 +26,11 @@ class DiscordThreadMember {
 
   factory DiscordThreadMember.fromJson(Map<String, dynamic> json) =>
       DiscordThreadMember(
-        id: json[idEntry] != null ? DiscordSnowflake(json[idEntry]) : null,
+        id: json[idEntry] != null
+            ? DiscordSnowflake(json[idEntry] as String)
+            : null,
         userId: json[userIdEntry] != null
-            ? DiscordSnowflake(json[userIdEntry])
+            ? DiscordSnowflake(json[userIdEntry] as String)
             : null,
         joinTimestamp: json[joinTimestampEntry] as String,
         flags: json[flagsEntry] as int,

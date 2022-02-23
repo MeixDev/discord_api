@@ -1,11 +1,13 @@
-import 'package:discord_api/src/models/discord_application.dart';
-import 'package:discord_api/src/models/discord_channel.dart';
-import 'package:discord_api/src/models/discord_snowflake.dart';
-
+import 'discord_application.dart';
+import 'discord_attachment.dart';
+import 'discord_channel.dart';
+import 'discord_channel_mention.dart';
+import 'discord_embed.dart';
 import 'discord_message_activity.dart';
 import 'discord_message_flag.dart';
 import 'discord_message_reference.dart';
 import 'discord_message_type.dart';
+import 'discord_snowflake.dart';
 import 'discord_reaction.dart';
 import 'discord_user.dart';
 

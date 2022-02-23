@@ -1,6 +1,6 @@
-import 'package:discord_api/src/models/discord_membership_state.dart';
-import 'package:discord_api/src/models/discord_snowflake.dart';
-import 'package:discord_api/src/models/discord_user.dart';
+import 'discord_membership_state.dart';
+import 'discord_snowflake.dart';
+import 'discord_user.dart';
 
 class DiscordTeamMember {
   final int membershipState;
@@ -29,7 +29,7 @@ class DiscordTeamMember {
       DiscordTeamMember(
         membershipState: json[membershipStateEntry] as int,
         permissions: List<String>.from(json[permissionsEntry]),
-        teamId: DiscordSnowflake(json[teamIdEntry]),
+        teamId: DiscordSnowflake(json[teamIdEntry] as String),
         user: DiscordUser.fromJson(json[userEntry]),
       );
 }

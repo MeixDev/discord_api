@@ -1,5 +1,4 @@
-import 'package:discord_api/src/models/discord_snowflake.dart';
-
+import 'discord_snowflake.dart';
 import 'discord_team_member.dart';
 
 class DiscordTeam {
@@ -25,13 +24,13 @@ class DiscordTeam {
   });
 
   factory DiscordTeam.fromJson(Map<String, dynamic> json) => DiscordTeam(
-        id: DiscordSnowflake(json[idEntry]),
+        id: DiscordSnowflake(json[idEntry] as String),
         icon: json[iconEntry] as String?,
         members: (json[membersEntry] as Iterable?)
             ?.cast<Map<String, dynamic>>()
             .map(DiscordTeamMember.fromJson)
             .toList(),
         name: json[nameEntry] as String,
-        ownerUserId: DiscordSnowflake(json[ownerUserIdEntry]),
+        ownerUserId: DiscordSnowflake(json[ownerUserIdEntry] as String),
       );
 }

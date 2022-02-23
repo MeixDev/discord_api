@@ -1,6 +1,6 @@
-import 'package:discord_api/src/models/discord_snowflake.dart';
-import 'package:discord_api/src/models/discord_user_flag.dart';
-
+import 'discord_guild_member.dart';
+import 'discord_snowflake.dart';
+import 'discord_user_flag.dart';
 import 'discord_premium_type.dart';
 
 class DiscordUser {
@@ -108,7 +108,7 @@ class DiscordUser {
   }
 
   factory DiscordUser.fromJson(Map<String, dynamic> json) => DiscordUser(
-        id: DiscordSnowflake(json[idEntry]),
+        id: DiscordSnowflake(json[idEntry] as String),
         username: json[usernameEntry] as String,
         discriminator: json[discriminatorEntry] as String,
         avatar: json[avatarEntry] as String?,
@@ -123,7 +123,10 @@ class DiscordUser {
         flags: json[flagsEntry] as int?,
         premiumType: json[premiumTypeEntry] as int?,
         publicFlags: json[publicFlagsEntry] as int?,
-        member: json[memberEntry] as String?,
+        member: json[memberEntry] != null
+            ? DiscordGuildMember.fromJson(
+                json[memberEntry] as Map<String, dynamic>)
+            : null,
       );
 
   DiscordUser copyWith({
@@ -142,7 +145,7 @@ class DiscordUser {
     int? flags,
     int? premiumType,
     int? publicFlags,
-    String? member,
+    DiscordGuildMember? member,
   }) {
     return DiscordUser(
       id: id ?? this.id,

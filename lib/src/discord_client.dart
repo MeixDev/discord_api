@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:discord_api/src/exceptions/discord_api_exceptions.dart';
+import 'exceptions/discord_api_exceptions.dart';
 
 import 'models/discord_api_scope.dart';
 import 'models/discord_authorization_information.dart';

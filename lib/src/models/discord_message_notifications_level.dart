@@ -1,0 +1,4 @@
+enum DiscordMessageNotificationsLevel {
+  allMessages,
+  onlyMentions,
+}

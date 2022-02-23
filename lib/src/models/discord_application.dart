@@ -1,6 +1,5 @@
-import 'package:discord_api/src/models/discord_application_flag.dart';
-import 'package:discord_api/src/models/discord_snowflake.dart';
-
+import 'discord_application_flag.dart';
+import 'discord_snowflake.dart';
 import 'discord_team.dart';
 import 'discord_user.dart';
 
@@ -101,7 +100,7 @@ class DiscordApplication {
 
   factory DiscordApplication.fromJson(Map<String, dynamic> json) =>
       DiscordApplication(
-        id: DiscordSnowflake(json[idEntry]),
+        id: DiscordSnowflake(json[idEntry] as String),
         name: json[nameEntry] as String,
         icon: json[iconEntry] as String?,
         description: json[descriptionEntry] as String,
@@ -119,10 +118,10 @@ class DiscordApplication {
             ? DiscordTeam.fromJson(json[teamEntry])
             : null,
         guildId: json[guildIdEntry] != null
-            ? DiscordSnowflake(json[guildIdEntry])
+            ? DiscordSnowflake(json[guildIdEntry] as String)
             : null,
         primarySkuId: json[primarySkuIdEntry] != null
-            ? DiscordSnowflake(json[primarySkuIdEntry])
+            ? DiscordSnowflake(json[primarySkuIdEntry] as String)
             : null,
         slug: json[slugEntry] as String?,
         coverImage: json[coverImageEntry] as String?,

@@ -1,5 +1,4 @@
-import 'package:discord_api/src/models/discord_snowflake.dart';
-
+import 'discord_snowflake.dart';
 import 'discord_user.dart';
 
 class DiscordEmoji {
@@ -33,7 +32,9 @@ class DiscordEmoji {
   });
 
   factory DiscordEmoji.fromJson(Map<String, dynamic> json) => DiscordEmoji(
-        id: json[idEntry] != null ? DiscordSnowflake(json[idEntry]) : null,
+        id: json[idEntry] != null
+            ? DiscordSnowflake(json[idEntry] as String)
+            : null,
         name: json[nameEntry] as String?,
         roles: json[rolesEntry] != null
             ? List<String>.from(json[rolesEntry])

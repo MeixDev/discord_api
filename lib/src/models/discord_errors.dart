@@ -1,5 +1,4 @@
 class DiscordErrors {
-
   /// The error code sent by Discord.
   final int code;
 
@@ -16,8 +15,8 @@ class DiscordErrors {
   });
 
   factory DiscordErrors.fromJson(Map<String, dynamic> json) => DiscordErrors(
-      code: json['code'],
-      message: json['message'],
-      errors: json['errors'] as Map<String, dynamic>,
+        code: json['code'],
+        message: json['message'],
+        errors: json['errors'] as Map<String, dynamic>,
       );
 }

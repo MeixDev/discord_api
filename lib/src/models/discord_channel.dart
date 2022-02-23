@@ -1,11 +1,10 @@
-import 'package:discord_api/src/models/discord_overwrite.dart';
-import 'package:discord_api/src/models/discord_snowflake.dart';
-import 'package:discord_api/src/models/discord_thread_member.dart';
-import 'package:discord_api/src/models/discord_thread_metadata.dart';
-import 'package:discord_api/src/models/discord_user.dart';
-import 'package:discord_api/src/models/discord_video_quality_mode.dart';
-
 import 'discord_channel_type.dart';
+import 'discord_overwrite.dart';
+import 'discord_snowflake.dart';
+import 'discord_thread_member.dart';
+import 'discord_thread_metadata.dart';
+import 'discord_user.dart';
+import 'discord_video_quality_mode.dart';
 
 class DiscordChannel {
   final DiscordSnowflake id;
@@ -105,35 +104,35 @@ class DiscordChannel {
   }
 
   factory DiscordChannel.fromJson(Map<String, dynamic> json) => DiscordChannel(
-        id: DiscordSnowflake(json[idEntry]),
+        id: DiscordSnowflake(json[idEntry] as String),
         type: json[typeEntry] as int,
         guildId: json[guildIdEntry] != null
-            ? DiscordSnowflake(json[guildIdEntry])
+            ? DiscordSnowflake(json[guildIdEntry] as String)
             : null,
         position: json[positionEntry] as int?,
         permissionOverwrites: json[permissionOverwritesEntry] != null
             ? List<DiscordOverwrite>.from(
-                json[permissionOverwritesEntry]!.map(DiscordOverwrite.fromJson))
+                json[permissionOverwritesEntry].map(DiscordOverwrite.fromJson))
             : null,
         name: json[nameEntry] as String?,
         topic: json[topicEntry] as String?,
         nsfw: json[nsfwEntry] as bool?,
         lastMessageId: json[lastMessageIdEntry] != null
-            ? DiscordSnowflake(json[lastMessageIdEntry])
+            ? DiscordSnowflake(json[lastMessageIdEntry] as String)
             : null,
         bitrate: json[bitrateEntry] as int?,
         userLimit: json[userLimitEntry] as int?,
         rateLimitPerUser: json[rateLimitPerUserEntry] as int?,
         recipients: json[recipientsEntry] != null
             ? List<DiscordUser>.from(
-                json[recipientsEntry]!.map(DiscordUser.fromJson))
+                json[recipientsEntry].map(DiscordUser.fromJson))
             : null,
         icon: json[iconEntry] as String?,
         ownerId: json[ownerIdEntry] != null
-            ? DiscordSnowflake(json[ownerIdEntry])
+            ? DiscordSnowflake(json[ownerIdEntry] as String)
             : null,
         parentId: json[parentIdEntry] != null
-            ? DiscordSnowflake(json[parentIdEntry])
+            ? DiscordSnowflake(json[parentIdEntry] as String)
             : null,
         lastPinTimestamp: json[lastPinTimestampEntry] as String?,
         rtcRegion: json[rtcRegionEntry] as String?,

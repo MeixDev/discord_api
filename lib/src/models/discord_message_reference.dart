@@ -1,4 +1,4 @@
-import 'package:discord_api/src/models/discord_snowflake.dart';
+import 'discord_snowflake.dart';
 
 class DiscordMessageReference {
   final DiscordSnowflake? messageId;
@@ -21,13 +21,13 @@ class DiscordMessageReference {
   factory DiscordMessageReference.fromJson(Map<String, dynamic> json) =>
       DiscordMessageReference(
         messageId: json[messageIdEntry] != null
-            ? DiscordSnowflake(json[messageIdEntry])
+            ? DiscordSnowflake(json[messageIdEntry] as String)
             : null,
         channelId: json[channelIdEntry] != null
-            ? DiscordSnowflake(json[channelIdEntry])
+            ? DiscordSnowflake(json[channelIdEntry] as String)
             : null,
         guildId: json[guildIdEntry] != null
-            ? DiscordSnowflake(json[guildIdEntry])
+            ? DiscordSnowflake(json[guildIdEntry] as String)
             : null,
         failIfNotExists: json[failIfNotExistsEntry] as bool?,
       );

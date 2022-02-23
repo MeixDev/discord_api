@@ -1,4 +1,4 @@
-import 'package:discord_api/src/models/discord_snowflake.dart';
+import 'discord_snowflake.dart';
 
 class DiscordFollowedChannel {
   final DiscordSnowflake channelId;
@@ -14,7 +14,7 @@ class DiscordFollowedChannel {
 
   factory DiscordFollowedChannel.fromJson(Map<String, dynamic> json) =>
       DiscordFollowedChannel(
-        channelId: DiscordSnowflake(json[channelIdEntry]),
-        webhookId: DiscordSnowflake(json[webhookIdEntry]),
+        channelId: DiscordSnowflake(json[channelIdEntry] as String),
+        webhookId: DiscordSnowflake(json[webhookIdEntry] as String),
       );
 }
