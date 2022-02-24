@@ -72,6 +72,7 @@ class DiscordGuild {
   /// * This field is deprecated and is replaced by [channel.rtc_region](https://discord.com/developers/docs/resources/channel#channel-object-channel-structure)
   ///
   /// is not always returned, and can be null
+  @Deprecated('Use channel.rtc_region instead')
   final String? region;
 
   /// id of afk channel

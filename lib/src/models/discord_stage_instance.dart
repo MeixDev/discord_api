@@ -21,6 +21,7 @@ class DiscordStageInstance {
   late final DiscordStagePrivacyLevel? _privacyLevelAsEnum;
 
   /// Whether or not Stage Discovery is disabled (deprecated)
+  @Deprecated('Use `privacyLevel` instead')
   final bool discoverableDisabled;
 
   static const idEntry = 'id';

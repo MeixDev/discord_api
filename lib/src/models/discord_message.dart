@@ -193,6 +193,7 @@ class DiscordMessage {
   /// **Deprecated** the stickers sent with the message
   ///
   /// is not always returned, hence the nullable property
+  @Deprecated('Use stickerItems instead')
   final List<DiscordSticker>? stickers;
 
   static const idEntry = 'id';
