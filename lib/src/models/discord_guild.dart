@@ -1,10 +1,12 @@
 import 'discord_channel.dart';
 import 'discord_emoji.dart';
 import 'discord_guild_premium_tier.dart';
+import 'discord_guild_scheduled_event.dart';
 import 'discord_mfa_level.dart';
 import 'discord_nsfw_level.dart';
 import 'discord_presence_update.dart';
 import 'discord_stage_instance.dart';
+import 'discord_sticker.dart';
 import 'discord_system_channel_flag.dart';
 import 'discord_explicit_content_filter_level.dart';
 import 'discord_guild_feature.dart';
@@ -48,6 +50,8 @@ class DiscordGuild {
   /// true if [the user](https://discord.com/developers/docs/resources/user#get-current-user-guilds)
   /// is the owner of the guild
   ///
+  /// * This field is only sent when using the [GET Current User Guilds](https://discord.com/developers/docs/resources/user#get-current-user-guilds) endpoint and are relative to the requested user
+  ///
   /// is not always returned, hence the nullable property
   final bool? owner;
 
@@ -57,11 +61,15 @@ class DiscordGuild {
   /// total permissions for [the user](https://discord.com/developers/docs/resources/user#get-current-user-guilds)
   /// in the guild (excludes overwrites)
   ///
+  /// * This field is only sent when using the [GET Current User Guilds](https://discord.com/developers/docs/resources/user#get-current-user-guilds) endpoint and are relative to the requested user
+  ///
   /// is not always returned, hence the nullable property
   final String? permissions;
 
   /// [voice region](https://discord.com/developers/docs/resources/voice#voice-region-object)
   /// id for the guild (deprecated)
+  ///
+  /// * This field is deprecated and is replaced by [channel.rtc_region](https://discord.com/developers/docs/resources/channel#channel-object-channel-structure)
   ///
   /// is not always returned, and can be null
   final String? region;
@@ -94,7 +102,7 @@ class DiscordGuild {
   /// default [message notifications level](https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level)
   final int defaultMessageNotifications;
 
-  late final DiscordMessageNotificationsLevel
+  late final DiscordMessageNotificationsLevel?
       _defaultMessageNotificationsAsEnum;
 
   /// [explicit content filter level](https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level)
@@ -141,6 +149,8 @@ class DiscordGuild {
   /// when this guild was joined at
   /// as an ISO 8601 datetime string
   ///
+  /// * This field is only sent within the [GUILD_CREATE](https://discord.com/developers/docs/topics/gateway#guild-create) event
+  ///
   /// is not always returned, hence the nullable property
   final String? joinedAt;
 
@@ -148,15 +158,21 @@ class DiscordGuild {
 
   /// true if this is considered a large guild
   ///
+  /// * This field is only sent within the [GUILD_CREATE](https://discord.com/developers/docs/topics/gateway#guild-create) event
+  ///
   /// is not always returned, hence the nullable property
   final bool? large;
 
   /// true if this guild is unavailable due to an outage
   ///
+  /// * This field is only sent within the [GUILD_CREATE](https://discord.com/developers/docs/topics/gateway#guild-create) event
+  ///
   /// is not always returned, hence the nullable property
   final bool? unavailable;
 
   /// total number of members in this guild
+  ///
+  /// * This field is only sent within the [GUILD_CREATE](https://discord.com/developers/docs/topics/gateway#guild-create) event
   ///
   /// is not always returned, hence the nullable property
   final int? memberCount;
@@ -164,26 +180,36 @@ class DiscordGuild {
   /// states of members currently in voice channels;
   /// lacks the `guild_id` key
   ///
+  /// * This field is only sent within the [GUILD_CREATE](https://discord.com/developers/docs/topics/gateway#guild-create) event
+  ///
   /// is not always returned, hence the nullable property
   final List<DiscordVoiceState>? voiceStates;
 
   /// users in the guild
+  ///
+  /// * This field is only sent within the [GUILD_CREATE](https://discord.com/developers/docs/topics/gateway#guild-create) event
   ///
   /// is not always returned, hence the nullable property
   final List<DiscordGuildMember>? members;
 
   /// channels in the guild
   ///
+  /// * This field is only sent within the [GUILD_CREATE](https://discord.com/developers/docs/topics/gateway#guild-create) event
+  ///
   /// is not always returned, hence the nullable property
   final List<DiscordChannel>? channels;
 
   /// all active threads in the guild that current user has permission to view
+  ///
+  /// * This field is only sent within the [GUILD_CREATE](https://discord.com/developers/docs/topics/gateway#guild-create) event
   ///
   /// is not always returned, hence the nullable property
   final List<DiscordChannel>? threads;
 
   /// presences of the members in the guild, will only include
   /// non-offline members if the size is greater than `large threshold`
+  ///
+  /// * This field is only sent within the [GUILD_CREATE](https://discord.com/developers/docs/topics/gateway#guild-create) event
   ///
   /// is not always returned, hence the nullable property
   final List<DiscordPresenceUpdate>? presences;
@@ -218,7 +244,7 @@ class DiscordGuild {
   /// (Server Boost level)
   final int premiumTier;
 
-  late final DiscordGuildPremiumTier _premiumTierAsEnum;
+  late final DiscordGuildPremiumTier? _premiumTierAsEnum;
 
   /// the number of boosts this guild currently has
   ///
@@ -264,9 +290,11 @@ class DiscordGuild {
   /// [guild NSFW level](https://discord.com/developers/docs/resources/guild#guild-object-guild-nsfw-level)
   final int nsfwLevel;
 
-  late final DiscordNsfwLevel _nsfwLevelAsEnum;
+  late final DiscordNsfwLevel? _nsfwLevelAsEnum;
 
   /// Stage instances in the guild
+  ///
+  /// * This field is only sent within the [GUILD_CREATE](https://discord.com/developers/docs/topics/gateway#guild-create) event
   ///
   /// is not always returned, hence the nullable property
   final List<DiscordStageInstance>? stageInstances;
@@ -277,6 +305,8 @@ class DiscordGuild {
   final List<DiscordSticker>? stickers;
 
   /// the scheduled events in the guild
+  ///
+  /// * This field is only sent within the [GUILD_CREATE](https://discord.com/developers/docs/topics/gateway#guild-create) event
   ///
   /// is not always returned, hence the nullable property
   final List<DiscordGuildScheduledEvent>? guildScheduledEvents;
@@ -389,6 +419,210 @@ class DiscordGuild {
     required this.nsfwLevel,
     this.stageInstances,
     this.stickers,
+    this.guildScheduledEvents,
     required this.premiumProgressBarEnabled,
   });
+
+  DiscordVerificationLevel get verificationLevelAsEnum =>
+      _verificationLevelAsEnum ??=
+          DiscordVerificationLevel.values[verificationLevel];
+
+  DiscordMessageNotificationsLevel get defaultMessageNotificationsAsEnum =>
+      _defaultMessageNotificationsAsEnum ??=
+          DiscordMessageNotificationsLevel.values[defaultMessageNotifications];
+
+  DiscordExplicitContentFilterLevel get explicitContentFilterAsEnum =>
+      _explicitContentFilterAsEnum ??=
+          DiscordExplicitContentFilterLevel.values[explicitContentFilter];
+
+  DiscordMfaLevel get mfaLevelAsEnum =>
+      _mfaLevelAsEnum ??= DiscordMfaLevel.values[mfaLevel];
+
+  // TODO: Unbitset the mask and convert them to a List of Enum for usage
+  // List<DiscordSystemChannelFlag> get systemChannelFlagsAsEnum =>
+  //     _systemChannelFlagsAsEnum ??=
+
+  DateTime? get joinedAtAsDateTime {
+    if (joinedAt == null) return null;
+    return _joinedAtAsDateTime ??= DateTime.parse(joinedAt!);
+  }
+
+  DiscordGuildPremiumTier get premiumTierAsEnum =>
+      _premiumTierAsEnum ??= DiscordGuildPremiumTier.values[premiumTier];
+
+  DiscordNsfwLevel get nsfwLevelAsEnum =>
+      _nsfwLevelAsEnum ??= DiscordNsfwLevel.values[nsfwLevel];
+
+  static List<DiscordGuildFeature> _createListFromJson(List<String> features) {
+    final list = <DiscordGuildFeature>[];
+    for (final feature in features) {
+      switch (feature) {
+        case "ANIMATED_ICON":
+          list.add(DiscordGuildFeature.animatedIcon);
+          break;
+        case "BANNER":
+          list.add(DiscordGuildFeature.banner);
+          break;
+        case "COMMERCE":
+          list.add(DiscordGuildFeature.commerce);
+          break;
+        case "COMMUNITY":
+          list.add(DiscordGuildFeature.community);
+          break;
+        case "DISCOVERABLE":
+          list.add(DiscordGuildFeature.discoverable);
+          break;
+        case "FEATURABLE":
+          list.add(DiscordGuildFeature.featurable);
+          break;
+        case "INVITE_SPLASH":
+          list.add(DiscordGuildFeature.inviteSplash);
+          break;
+        case "MEMBER_VERIFICATION_GATE_ENABLED":
+          list.add(DiscordGuildFeature.memberVerificationGateEnable);
+          break;
+        case "MONETIZATION_ENABLED":
+          list.add(DiscordGuildFeature.monetizationEnabled);
+          break;
+        case "MORE_STICKERS":
+          list.add(DiscordGuildFeature.moreStickers);
+          break;
+        case "NEWS":
+          list.add(DiscordGuildFeature.news);
+          break;
+        case "PARTNERED":
+          list.add(DiscordGuildFeature.partnered);
+          break;
+        case "PREVIEW_ENABLED":
+          list.add(DiscordGuildFeature.previewEnabled);
+          break;
+        case "PRIVATE_THREADS":
+          list.add(DiscordGuildFeature.privateThreads);
+          break;
+        case "ROLE_ICONS":
+          list.add(DiscordGuildFeature.roleIcons);
+          break;
+        case "SEVEN_DAY_THREAD_ARCHIVE":
+          list.add(DiscordGuildFeature.sevenDayThreadArchive);
+          break;
+        case "THREE_DAY_THREAD_ARCHIVE":
+          list.add(DiscordGuildFeature.threeDayThreadArchive);
+          break;
+        case "TICKETED_EVENTS_ENABLED":
+          list.add(DiscordGuildFeature.ticketedEventsEnabled);
+          break;
+        case "VANITY_URL":
+          list.add(DiscordGuildFeature.vanityUrl);
+          break;
+        case "VERIFIED":
+          list.add(DiscordGuildFeature.verified);
+          break;
+        case "VIP_REGIONS":
+          list.add(DiscordGuildFeature.vipRegions);
+          break;
+        case "WELCOME_SCREEN_ENABLED":
+          list.add(DiscordGuildFeature.welcomeScreenEnabled);
+          break;
+      }
+    }
+    return list;
+  }
+
+  factory DiscordGuild.fromJson(Map<String, dynamic> json) => DiscordGuild(
+        id: DiscordSnowflake(json[idEntry] as String),
+        name: json[nameEntry] as String,
+        icon: json[iconEntry] as String?,
+        iconHash: json[iconHashEntry] as String?,
+        splash: json[splashEntry] as String?,
+        discoverySplash: json[discoverySplashEntry] as String?,
+        owner: json[ownerEntry] as bool?,
+        ownerId: DiscordSnowflake(json[ownerIdEntry] as String),
+        permissions: json[permissionsEntry] as String?,
+        region: json[regionEntry] as String,
+        afkChannelId: json[afkChannelIdEntry] != null
+            ? DiscordSnowflake(json[afkChannelIdEntry] as String)
+            : null,
+        afkTimeout: json[afkTimeoutEntry] as int,
+        widgetEnabled: json[widgetEnabledEntry] as bool?,
+        widgetChannelId: json[widgetChannelIdEntry] != null
+            ? DiscordSnowflake(json[widgetChannelIdEntry] as String)
+            : null,
+        verificationLevel: json[verificationLevelEntry] as int,
+        defaultMessageNotifications:
+            json[defaultMessageNotificationsEntry] as int,
+        explicitContentFilter: json[explicitContentFilterEntry] as int,
+        roles: List<DiscordRole>.from(
+            (json[rolesEntry]).map(DiscordRole.fromJson)),
+        emojis: List<DiscordEmoji>.from(
+            (json[emojisEntry]).map(DiscordEmoji.fromJson)),
+        features: _createListFromJson(json[featuresEntry] as List<String>),
+        mfaLevel: json[mfaLevelEntry] as int,
+        applicationId: json[applicationIdEntry] != null
+            ? DiscordSnowflake(json[applicationIdEntry] as String)
+            : null,
+        systemChannelId: json[systemChannelIdEntry] != null
+            ? DiscordSnowflake(json[systemChannelIdEntry] as String)
+            : null,
+        systemChannelFlags: json[systemChannelFlagsEntry] as int,
+        rulesChannelId: json[rulesChannelIdEntry] != null
+            ? DiscordSnowflake(json[rulesChannelIdEntry] as String)
+            : null,
+        joinedAt: json[joinedAtEntry] as String?,
+        large: json[largeEntry] as bool?,
+        unavailable: json[unavailableEntry] as bool?,
+        memberCount: json[memberCountEntry] as int?,
+        voiceStates: json[voiceStatesEntry] != null
+            ? List<DiscordVoiceState>.from(
+                (json[voiceStatesEntry]).map(DiscordVoiceState.fromJson))
+            : null,
+        members: json[membersEntry] != null
+            ? List<DiscordGuildMember>.from(
+                (json[membersEntry]).map(DiscordGuildMember.fromJson))
+            : null,
+        channels: json[channelsEntry] != null
+            ? List<DiscordChannel>.from(
+                (json[channelsEntry]).map(DiscordChannel.fromJson))
+            : null,
+        threads: json[presencesEntry] != null
+            ? List<DiscordChannel>.from(
+                (json[presencesEntry]).map(DiscordChannel.fromJson))
+            : null,
+        presences: json[presencesEntry] != null
+            ? List<DiscordPresenceUpdate>.from(
+                (json[presencesEntry]).map(DiscordPresenceUpdate.fromJson))
+            : null,
+        maxPresences: json[maxPresencesEntry] as int?,
+        maxMembers: json[maxMembersEntry] as int?,
+        vanityUrlCode: json[vanityUrlCodeEntry] as String?,
+        description: json[descriptionEntry] as String?,
+        banner: json[bannerEntry] as String?,
+        premiumTier: json[premiumTierEntry] as int,
+        premiumSubscriptionCount: json[premiumSubscriptionCountEntry] as int?,
+        preferredLocale: json[preferredLocaleEntry] as String,
+        publicUpdatesChannelId: json[publicUpdatesChannelIdEntry] != null
+            ? DiscordSnowflake(json[publicUpdatesChannelIdEntry] as String)
+            : null,
+        maxVideoChannelUsers: json[maxVideoChannelUsersEntry] as int?,
+        approximateMemberCount: json[approximateMemberCountEntry] as int?,
+        approximatePresenceCount: json[approximatePresenceCountEntry] as int?,
+        welcomeScreen: json[welcomeScreenEntry] != null
+            ? DiscordWelcomeScreen.fromJson(
+                json[welcomeScreenEntry] as Map<String, dynamic>)
+            : null,
+        nsfwLevel: json[nsfwLevelEntry] as int,
+        stageInstances: json[stageInstancesEntry] != null
+            ? List<DiscordStageInstance>.from(
+                (json[stageInstancesEntry]).map(DiscordStageInstance.fromJson))
+            : null,
+        stickers: json[stickersEntry] != null
+            ? List<DiscordSticker>.from(
+                (json[stickersEntry]).map(DiscordSticker.fromJson))
+            : null,
+        guildScheduledEvents: json[guildScheduledEventsEntry] != null
+            ? List<DiscordGuildScheduledEvent>.from(
+                (json[guildScheduledEventsEntry])
+                    .map(DiscordGuildScheduledEvent.fromJson))
+            : null,
+        premiumProgressBarEnabled: json[premiumProgressBarEnabledEntry] as bool,
+      );
 }

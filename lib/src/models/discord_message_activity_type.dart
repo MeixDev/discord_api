@@ -3,5 +3,6 @@ enum DiscordMessageActivityType {
   join,
   spectate,
   listen,
+  unused4,
   joinRequest,
 }

@@ -1,3 +1,5 @@
+/// Type 19 and 20 are only in API v8. In v6, they are still type 0.
+/// Type 21 is only in API v9.
 enum DiscordMessageType {
   default0,
   recipientAdd,

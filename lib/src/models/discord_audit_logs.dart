@@ -1,4 +1,5 @@
 import 'discord_channel.dart';
+import 'discord_guild_scheduled_event.dart';
 import 'discord_user.dart';
 
 class DiscordAuditLogs {
