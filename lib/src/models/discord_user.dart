@@ -3,6 +3,7 @@ import 'discord_snowflake.dart';
 import 'discord_user_flag.dart';
 import 'discord_premium_type.dart';
 
+// TODO: Add documentation
 class DiscordUser {
   final DiscordSnowflake id;
 
@@ -73,39 +74,8 @@ class DiscordUser {
   DiscordPremiumType get premiumTypeAsEnum =>
       _premiumTypeAsEnum ??= DiscordPremiumType.values[premiumType ?? 0];
 
-  void _addPublicFlagAsEnum(String r, int index, DiscordUserFlag flag) {
-    if (r.length >= index + 1 && r.substring(index, index + 1) == '1') {
-      _publicFlagsAsEnum!.add(flag);
-    }
-  }
-
-  List<DiscordUserFlag> get publicFlagsAsEnum {
-    if (flags == null || flags == 0) {
-      _publicFlagsAsEnum = [DiscordUserFlag.none];
-      return _publicFlagsAsEnum!;
-    }
-    if (_publicFlagsAsEnum != null) {
-      return _publicFlagsAsEnum!;
-    }
-    _publicFlagsAsEnum = <DiscordUserFlag>[];
-    final radixString =
-        String.fromCharCodes(flags!.toRadixString(2).runes.toList().reversed);
-    _addPublicFlagAsEnum(radixString, 0, DiscordUserFlag.staff);
-    _addPublicFlagAsEnum(radixString, 1, DiscordUserFlag.partner);
-    _addPublicFlagAsEnum(radixString, 2, DiscordUserFlag.hypesquad);
-    _addPublicFlagAsEnum(radixString, 3, DiscordUserFlag.bugHunterLevel1);
-    _addPublicFlagAsEnum(radixString, 6, DiscordUserFlag.hypesquadOnlineHouse1);
-    _addPublicFlagAsEnum(radixString, 7, DiscordUserFlag.hypesquadOnlineHouse2);
-    _addPublicFlagAsEnum(radixString, 8, DiscordUserFlag.hypesquadOnlineHouse3);
-    _addPublicFlagAsEnum(radixString, 9, DiscordUserFlag.premiumEarlySupporter);
-    _addPublicFlagAsEnum(radixString, 10, DiscordUserFlag.teamPseudoUser);
-    _addPublicFlagAsEnum(radixString, 14, DiscordUserFlag.bugHunterLevel2);
-    _addPublicFlagAsEnum(radixString, 16, DiscordUserFlag.verifiedBot);
-    _addPublicFlagAsEnum(radixString, 17, DiscordUserFlag.verifiedDeveloper);
-    _addPublicFlagAsEnum(radixString, 18, DiscordUserFlag.certifiedModerator);
-    _addPublicFlagAsEnum(radixString, 19, DiscordUserFlag.botHttpInteractions);
-    return _publicFlagsAsEnum!;
-  }
+  List<DiscordUserFlag> get publicFlagsAsEnum =>
+      _publicFlagsAsEnum ??= discordUserFlagsAsEnum(flags);
 
   factory DiscordUser.fromJson(Map<String, dynamic> json) => DiscordUser(
         id: DiscordSnowflake(json[idEntry] as String),

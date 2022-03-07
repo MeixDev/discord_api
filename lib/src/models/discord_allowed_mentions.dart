@@ -1,10 +1,24 @@
 import 'discord_mention_type.dart';
 
 class DiscordAllowedMentions {
+  /// an array of [allowed mention types](https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types)
+  /// to parse from the content.
   final List<String> parse;
+
   late final List<DiscordMentionType>? _parseAsEnum;
+
+  /// array of role_ids to mention (Max size of 100)
+  ///
+  /// Should be converted to DiscordSnowflake if the need arise
   final List<String> roles;
+
+  /// array of user_ids to mention (Max size of 100)
+  ///
+  /// Should be converted to DiscordSnowflake if the need arise
   final List<String> users;
+
+  /// for replies, whether to mention the author of the message being
+  /// replied to (default false)
   final bool repliedUser;
 
   static const parseEntry = 'parse';

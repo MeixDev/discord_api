@@ -2,10 +2,18 @@ import 'discord_channel_type.dart';
 import 'discord_snowflake.dart';
 
 class DiscordChannelMention {
+  /// id of the channel
   final DiscordSnowflake id;
+
+  /// id of the guild containing the channel
   final DiscordSnowflake guildId;
+
+  /// the [type of channel](https://discord.com/developers/docs/resources/channel#channel-object-channel-types)
   final int type;
+
   late final DiscordChannelType? _typeAsEnum;
+
+  /// the name of the channel
   final String name;
 
   static const idEntry = 'id';

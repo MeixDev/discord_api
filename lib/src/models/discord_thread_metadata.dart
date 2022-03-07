@@ -1,11 +1,37 @@
 class DiscordThreadMetadata {
+  /// whether the thread is archived
   final bool archived;
-  final int autoArchiveDuration; // in minutes, 60 / 1440 / 4320 / 10080
+
+  /// duration in minutes to automatically archive the thread
+  /// after recent activity, can be set to: 60, 1440, 4320, 10080
+  final int autoArchiveDuration;
+
+  /// timestamp when the thread's archive status was last changed,
+  /// used for calculating recent activity
+  ///
+  /// as an ISO 8601 string
   final String archiveTimestamp;
+
   late final DateTime? _archiveTimestampAsDateTime;
+
+  /// whether the thread is locked; when a thread is locked,
+  /// only users with MANAGE_THREADS can unarchive it
   final bool locked;
+
+  /// whether non-moderators can add other non-moderators
+  /// to a thread; only available on private threads
+  ///
+  /// is not always returned, hence the nullable property
   final bool? invitable;
-  final String? createTimestamp; // only populated for threads post 2022-01-09
+
+  /// timestamp when the thread was created; only populated
+  /// for threads created after 2022-01-09
+  ///
+  /// as an ISO 8601 string
+  ///
+  /// is not always returned, hence the nullable property
+  final String? createTimestamp;
+
   late final DateTime? _createTimestampAsDateTime;
 
   static const archivedEntry = 'archived';

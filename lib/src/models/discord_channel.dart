@@ -6,6 +6,7 @@ import 'discord_thread_metadata.dart';
 import 'discord_user.dart';
 import 'discord_video_quality_mode.dart';
 
+/// TODO: Add Documentation
 class DiscordChannel {
   final DiscordSnowflake id;
   final int type;

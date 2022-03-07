@@ -4,26 +4,88 @@ import 'discord_team.dart';
 import 'discord_user.dart';
 
 class DiscordApplication {
+  /// the id of the app
   final DiscordSnowflake id;
 
+  /// the name of the app
   final String name;
+
+  /// the [icon hash](https://discord.com/developers/docs/reference#image-formatting) of the app
+  ///
+  /// is always returned, but can be null
   final String? icon;
+
+  /// the description of the app
   final String description;
 
+  /// an array of rpc origin urls, if rpc is enabled
+  ///
+  /// is not always returned, hence the nullable property
   final List<String>? rpcOrigins;
+
+  /// when false only app owner can join the app's bot to guilds
   final bool botPublic;
+
+  /// when true the app's bot will only join upon completion of the full oauth2
+  /// code grant flow
   final bool botRequireCodeGrant;
+
+  /// the url of the app's terms of service
+  ///
+  /// is not always returned, hence the nullable property
   final String? termsOfServiceUrl;
+
+  /// the url of the app's privacy policy
+  ///
+  /// is not always returned, hence the nullable property
   final String? privacyPolicyUrl;
+
+  /// partial user object containing info on the owner of the application
+  ///
+  /// is not always returned, hence the nullable property
   final DiscordUser? owner;
+
+  /// if this application is a game sold on Discord,
+  /// this field will be the summary field for the store page of its primary sku
   final String summary;
+
+  /// the hex encoded key for verification in interactions and the
+  /// GameSDK's [GetTicket](https://discord.com/developers/docs/game-sdk/applications#getticket)
   final String verifyKey;
+
+  /// if the application belongs to a team, this will be a list of the members of that team
+  ///
+  /// is always returned, but can be null
   final DiscordTeam? team;
+
+  ///	if this application is a game sold on Discord, this field
+  /// will be the guild to which it has been linked
+  ///
+  /// is not always returned, hence the nullable property
   final DiscordSnowflake? guildId;
+
+  /// if this application is a game sold on Discord, this field
+  /// will be the id of the "Game SKU" that is created, if exists
+  ///
+  /// is not always returned, hence the nullable property
   final DiscordSnowflake? primarySkuId;
+
+  /// if this application is a game sold on Discord, this field
+  /// will be the URL slug that links to the store page
+  ///
+  /// is not always returned, hence the nullable property
   final String? slug;
+
+  /// 	the application's default rich presence invite [cover image hash](https://discord.com/developers/docs/reference#image-formatting)
+  ///
+  /// is not always returned, hence the nullable property
   final String? coverImage;
+
+  /// the application's public [flags](https://discord.com/developers/docs/resources/application#application-object-application-flags)
+  ///
+  /// is not always returned, hence the nullable property
   final int? flags;
+
   late final List<DiscordApplicationFlag>? _flagsAsEnum;
 
   static const idEntry = 'id';
@@ -66,37 +128,8 @@ class DiscordApplication {
     this.flags,
   });
 
-  void _addFlagAsEnum(String r, int index, DiscordApplicationFlag flag) {
-    if (r.length >= index + 1 && r.substring(index, index + 1) == '1') {
-      _flagsAsEnum!.add(flag);
-    }
-  }
-
-  List<DiscordApplicationFlag> get flagsAsEnum {
-    if (flags == null) {
-      return <DiscordApplicationFlag>[];
-    }
-    if (_flagsAsEnum != null) {
-      return _flagsAsEnum!;
-    }
-    _flagsAsEnum = <DiscordApplicationFlag>[];
-    final radixString =
-        String.fromCharCodes(flags!.toRadixString(2).runes.toList().reversed);
-    _addFlagAsEnum(radixString, 12, DiscordApplicationFlag.gatewayPresence);
-    _addFlagAsEnum(
-        radixString, 13, DiscordApplicationFlag.gatewayPresenceLimited);
-    _addFlagAsEnum(radixString, 14, DiscordApplicationFlag.gatewayGuildMembers);
-    _addFlagAsEnum(
-        radixString, 15, DiscordApplicationFlag.gatewayGuildMembersLimited);
-    _addFlagAsEnum(
-        radixString, 16, DiscordApplicationFlag.verificationPendingGuildLimit);
-    _addFlagAsEnum(radixString, 17, DiscordApplicationFlag.embedded);
-    _addFlagAsEnum(
-        radixString, 18, DiscordApplicationFlag.gatewayMessageContent);
-    _addFlagAsEnum(
-        radixString, 19, DiscordApplicationFlag.gatewayMessageContentLimited);
-    return _flagsAsEnum!;
-  }
+  List<DiscordApplicationFlag> get flagsAsEnum =>
+      _flagsAsEnum ??= discordApplicationFlagsAsEnum(flags);
 
   factory DiscordApplication.fromJson(Map<String, dynamic> json) =>
       DiscordApplication(

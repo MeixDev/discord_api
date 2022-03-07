@@ -1,3 +1,4 @@
+// TODO: Add Documentation
 enum DiscordEmbedType {
   rich,
   image,

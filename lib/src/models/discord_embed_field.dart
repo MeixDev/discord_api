@@ -1,6 +1,13 @@
 class DiscordEmbedField {
+  /// name of the field
   final String name;
+
+  /// value of the field
   final String value;
+
+  /// whether or not this field should display inline
+  ///
+  /// is not always returned, hence the nullable property
   final bool? inline;
 
   static const nameEntry = 'name';

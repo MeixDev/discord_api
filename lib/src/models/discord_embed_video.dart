@@ -1,7 +1,20 @@
 class DiscordEmbedVideo {
+  /// source url of video
   final String url;
+
+  /// a proxied url of the video
+  ///
+  /// is not always returned, hence the nullable property
   final String? proxyUrl;
+
+  /// height of the video
+  ///
+  /// is not always returned, hence the nullable property
   final int? height;
+
+  /// width of the video
+  ///
+  /// is not always returned, hence the nullable property
   final int? width;
 
   static const urlEntry = 'url';

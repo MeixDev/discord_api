@@ -1,5 +1,12 @@
 class DiscordEmbedProvider {
+  /// name of provider
+  ///
+  /// is not always returned, hence the nullable property
   final String? name;
+
+  /// url of provider
+  ///
+  /// is not always returned, hence the nullable property
   final String? url;
 
   static const nameEntry = 'name';

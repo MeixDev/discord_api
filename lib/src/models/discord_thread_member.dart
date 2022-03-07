@@ -1,10 +1,18 @@
 import 'discord_snowflake.dart';
 
 class DiscordThreadMember {
+  /// the id of the thread
   final DiscordSnowflake? id;
+
+  /// the id of the user
   final DiscordSnowflake? userId;
+
+  /// the time the current user last joined the thread
   final String joinTimestamp;
+
   late final DateTime? _joinTimestampAsDateTime;
+
+  /// any user-thread settings, currently only used for notifications
   final int flags;
 
   static const idEntry = 'id';

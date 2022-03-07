@@ -1,9 +1,29 @@
 import 'discord_snowflake.dart';
 
 class DiscordMessageReference {
+  /// id of the originating message
+  ///
+  /// is not always returned, hence the nullable property
   final DiscordSnowflake? messageId;
+
+  /// id of the originating message's channel
+  ///
+  /// * is optional when creating a reply, but will always
+  /// be present when receiving an event/response that includes this data model.
+  ///
+  /// is not always returned, hence the nullable property
   final DiscordSnowflake? channelId;
+
+  /// id of the originating message's guild
+  ///
+  /// is not always returned, hence the nullable property
   final DiscordSnowflake? guildId;
+
+  /// when sending, whether to error if the referenced message
+  /// doesn't exist instead of sending as a normal (non-reply)
+  /// message, default true
+  ///
+  /// is not always returned, hence the nullable property
   final bool? failIfNotExists;
 
   static const messageIdEntry = 'message_id';

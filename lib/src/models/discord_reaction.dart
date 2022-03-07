@@ -1,8 +1,13 @@
 import 'discord_emoji.dart';
 
 class DiscordReaction {
+  /// times this emoji has been used to react
   final int count;
+
+  /// whether the current user reacted using this emoji
   final bool me;
+
+  /// emoji information
   final DiscordEmoji emoji;
 
   static const countEntry = 'count';

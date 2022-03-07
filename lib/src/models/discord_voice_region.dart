@@ -1,8 +1,17 @@
 class DiscordVoiceRegion {
+  /// unique ID for the region
   final String id;
+
+  /// name of the region
   final String name;
+
+  /// true for a single server that is closest to the current user's client
   final bool optimal;
+
+  /// whether this is a deprecated voice region (avoid switching to these)
   final bool deprecated;
+
+  /// whether this is a custom voice region (used for events/etc)
   final bool custom;
 
   static const idEntry = 'id';

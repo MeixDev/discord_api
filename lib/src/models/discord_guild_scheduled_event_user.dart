@@ -11,6 +11,8 @@ class DiscordGuildScheduledEventUser {
 
   /// guild member data for this user for this guild
   /// which this event belongs to, if any
+  ///
+  /// is not always returned, hence the nullable property
   final DiscordGuildMember? member;
 
   static const guildScheduledEventIdEntry = 'guild_scheduled_event_id';

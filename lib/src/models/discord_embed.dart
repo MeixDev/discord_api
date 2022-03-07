@@ -6,6 +6,7 @@ import 'discord_embed_provider.dart';
 import 'discord_embed_thumnail.dart';
 import 'discord_embed_video.dart';
 
+// TODO: Add Documentation
 class DiscordEmbed {
   final String? title;
   final String? type;

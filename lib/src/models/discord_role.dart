@@ -4,14 +4,14 @@ import 'discord_snowflake.dart';
 class DiscordRole {
   final DiscordSnowflake id;
   final String name;
-  final int color;
-  final bool hoist;
+  final int? color;
+  final bool? hoist;
   final String? icon;
   final String? unicodeEmoji;
-  final int position;
-  final String permissions;
-  final bool managed;
-  final bool mentionable;
+  final int? position;
+  final String? permissions;
+  final bool? managed;
+  final bool? mentionable;
   final DiscordRoleTags? tags;
 
   static const idEntry = 'id';
@@ -29,28 +29,28 @@ class DiscordRole {
   DiscordRole({
     required this.id,
     required this.name,
-    required this.color,
-    required this.hoist,
+    this.color,
+    this.hoist,
     this.icon,
     this.unicodeEmoji,
-    required this.position,
-    required this.permissions,
-    required this.managed,
-    required this.mentionable,
+    this.position,
+    this.permissions,
+    this.managed,
+    this.mentionable,
     this.tags,
   });
 
   factory DiscordRole.fromJson(Map<String, dynamic> json) => DiscordRole(
         id: DiscordSnowflake(json[idEntry] as String),
         name: json[nameEntry] as String,
-        color: json[colorEntry] as int,
-        hoist: json[hoistEntry] as bool,
+        color: json[colorEntry] as int?,
+        hoist: json[hoistEntry] as bool?,
         icon: json[iconEntry] as String?,
         unicodeEmoji: json[unicodeEmojiEntry] as String?,
-        position: json[positionEntry] as int,
-        permissions: json[permissionsEntry] as String,
-        managed: json[managedEntry] as bool,
-        mentionable: json[mentionableEntry] as bool,
+        position: json[positionEntry] as int?,
+        permissions: json[permissionsEntry] as String?,
+        managed: json[managedEntry] as bool?,
+        mentionable: json[mentionableEntry] as bool?,
         tags: json[tagsEntry] != null
             ? DiscordRoleTags.fromJson(json[tagsEntry])
             : null,

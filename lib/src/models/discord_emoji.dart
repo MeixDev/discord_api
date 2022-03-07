@@ -1,6 +1,7 @@
 import 'discord_snowflake.dart';
 import 'discord_user.dart';
 
+// TODO: Add Documentation
 class DiscordEmoji {
   final DiscordSnowflake? id;
   final String? name;

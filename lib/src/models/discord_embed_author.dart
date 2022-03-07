@@ -1,7 +1,20 @@
 class DiscordEmbedAuthor {
+  /// name of author
   final String name;
+
+  /// url of author
+  ///
+  /// is not always returned, hence the nullable property
   final String? url;
+
+  /// url of author icon (only supports http(s) and attachments)
+  ///
+  /// is not always returned, hence the nullable property
   final String? iconUrl;
+
+  /// a proxied url of author icon
+  ///
+  /// is not always returned, hence the nullable property
   final String? proxyIconUrl;
 
   static const nameEntry = 'name';

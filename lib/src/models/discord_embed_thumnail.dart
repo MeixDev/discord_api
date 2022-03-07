@@ -1,7 +1,20 @@
 class DiscordEmbedThumbnail {
+  /// source url of thumbnail (only supports http(s) and attachments)
   final String url;
+
+  /// a proxied url of the thumbnail
+  ///
+  /// is not always returned, hence the nullable property
   final String? proxyUrl;
+
+  /// height of the thumbnail
+  ///
+  /// is not always returned, hence the nullable property
   final int? height;
+
+  /// width of the thumbnail
+  ///
+  /// is not always returned, hence the nullable property
   final int? width;
 
   static const urlEntry = 'url';

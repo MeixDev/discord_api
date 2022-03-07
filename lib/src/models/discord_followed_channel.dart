@@ -1,7 +1,10 @@
 import 'discord_snowflake.dart';
 
 class DiscordFollowedChannel {
+  /// source channel id
   final DiscordSnowflake channelId;
+
+  /// created target webhook id
   final DiscordSnowflake webhookId;
 
   static const channelIdEntry = 'channel_id';

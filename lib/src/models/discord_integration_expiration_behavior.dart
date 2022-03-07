@@ -1,0 +1,4 @@
+enum DiscordIntegrationExpirationBehavior {
+  removeRole,
+  kick,
+}

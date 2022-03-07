@@ -1,5 +1,6 @@
 import 'discord_snowflake.dart';
 
+// TODO: Add Documentation
 class DiscordAttachment {
   final DiscordSnowflake id;
   final String filename;
