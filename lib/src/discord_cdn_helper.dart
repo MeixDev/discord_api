@@ -1,10 +1,13 @@
 import 'package:discord_api/src/models/discord_image_format.dart';
 
 class DiscordCdnHelper {
+  static final instance = DiscordCdnHelper._();
+  DiscordCdnHelper._();
+
   static final cndUrl = Uri(scheme: "https", host: "cdn.discordapp.com");
 
   /// Available formats : PNG, JPEG, WebP, GIF
-  static final formatList1 = [
+  static const formatList1 = [
     DiscordImageFormat.png,
     DiscordImageFormat.jpeg,
     DiscordImageFormat.webp,
@@ -12,14 +15,14 @@ class DiscordCdnHelper {
   ];
 
   /// Available formats : PNG, JPEG, WebP
-  static final formatList2 = [
+  static const formatList2 = [
     DiscordImageFormat.png,
     DiscordImageFormat.jpeg,
     DiscordImageFormat.webp,
   ];
 
   /// Available formats : PNG, Lottie
-  static final formatList3 = [
+  static const formatList3 = [
     DiscordImageFormat.png,
     DiscordImageFormat.lottie,
   ];
@@ -28,6 +31,8 @@ class DiscordCdnHelper {
   ///
   /// The size is only valid if it's a power of 2,
   /// between 16 and 4096.
+  ///
+  /// **NOTE**: Apparently, 160 also is a valid size, even though it doesn't meet the requirements.
   bool isValidSize(int x) {
     return (x >= 16) && (x <= 4096) && ((x & (x - 1)) == 0);
   }
@@ -40,7 +45,7 @@ class DiscordCdnHelper {
   /// Returns the CDN URL for a given path, as an URI.
   ///
   /// Probably shouldn't be used, as specialized functions exists.
-  Uri getUrl(String path) => cndUrl.replace(pathSegments: path.split('/'));
+  Uri getUrl(String path) => cndUrl.resolve(path);
 
   /// Tries to create the right URL slug for an emoji, given its emoji_id, in a given format
   /// (defaults to PNG), with a given size (defaults to 128).

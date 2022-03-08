@@ -27,7 +27,7 @@ class DiscordClient {
   final DiscordHttpClient discordHttpClient;
 
   /// Contains all methods necessary to build elements from Discord's CDN endpoints.
-  final DiscordCdnHelper cdn = DiscordCdnHelper();
+  final DiscordCdnHelper cdn = DiscordCdnHelper.instance;
 
   /// If you need it, you can get the [DiscordDioProvider] from the discord_api_dio_provider package.
   /// Otherwise, you'll have to implement `discordHttpClient` yourself.
