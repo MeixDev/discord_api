@@ -165,7 +165,6 @@ class DiscordDioProvider extends DiscordHttpClient {
 
   @override
   Future<DiscordToken> getAccessToken(String code, String redirectUri) async {
-    assert(_discordToken != null);
     final options = Options(
       contentType: Headers.formUrlEncodedContentType,
     );

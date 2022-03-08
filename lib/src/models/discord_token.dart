@@ -38,8 +38,10 @@ class DiscordToken {
         scope: json[scopeEntry] as String,
         tokenType: json[tokenTypeEntry] as String,
         expiresIn: json[expiresInEntry] as int,
-        webhook: DiscordTokenWebhook.fromJson(
-            json[webhookEntry] as Map<String, dynamic>),
+        webhook: json[webhookEntry] != null
+            ? DiscordTokenWebhook.fromJson(
+                json[webhookEntry] as Map<String, dynamic>)
+            : null,
       );
 
   DiscordToken copyWith({

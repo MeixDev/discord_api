@@ -7,6 +7,7 @@ import 'exceptions/discord_api_exceptions.dart';
 import 'models/discord_api_scope.dart';
 import 'models/discord_authorization_information.dart';
 import 'models/discord_token.dart';
+import 'models/discord_user.dart';
 import 'providers/discord_http_client.dart';
 
 class DiscordClient {
@@ -88,6 +89,18 @@ class DiscordClient {
       final data = await discordHttpClient
           .getCall([apiPath, versionPath, oauth2Path, '@me']);
       return DiscordAuthorizationInformation.fromJson(data);
+    } catch (e) {
+      throw DiscordApiException(e.toString());
+    }
+  }
+
+  Future<DiscordUser> getCurrentUser() async {
+    try {
+      final data = await discordHttpClient.getCall([
+        "users",
+        "@me",
+      ]);
+      return DiscordUser.fromJson(data);
     } catch (e) {
       throw DiscordApiException(e.toString());
     }
