@@ -3,7 +3,7 @@ import 'discord_embed_field.dart';
 import 'discord_embed_footer.dart';
 import 'discord_embed_image.dart';
 import 'discord_embed_provider.dart';
-import 'discord_embed_thumnail.dart';
+import 'discord_embed_thumbnail.dart';
 import 'discord_embed_video.dart';
 
 // TODO: Add Documentation
