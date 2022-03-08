@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:discord_api/src/discord_cdn_helper.dart';
+
 import 'exceptions/discord_api_exceptions.dart';
 
 import 'models/discord_api_scope.dart';
@@ -17,12 +19,15 @@ class DiscordClient {
   static const apiPath = "api";
   static const versionPath = "v$apiVersion";
 
-  static final baseUrl = Uri(scheme: 'https', host: 'discord.com');
+  static final baseUrl = Uri(scheme: "https", host: "discord.com");
 
   final String redirectUri;
   final String clientId;
   final String clientSecret;
   final DiscordHttpClient discordHttpClient;
+
+  /// Contains all methods necessary to build elements from Discord's CDN endpoints.
+  final DiscordCdnHelper cdn = DiscordCdnHelper();
 
   /// If you need it, you can get the [DiscordDioProvider] from the discord_api_dio_provider package.
   /// Otherwise, you'll have to implement `discordHttpClient` yourself.
