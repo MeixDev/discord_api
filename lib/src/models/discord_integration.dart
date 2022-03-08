@@ -134,6 +134,17 @@ class DiscordIntegration {
     this.application,
   });
 
+  DiscordIntegrationExpirationBehavior? get expireBehaviorAsEnum {
+    if (expireBehavior == null) return null;
+    return _expireBehaviorAsEnum ??=
+        DiscordIntegrationExpirationBehavior.values[expireBehavior!];
+  }
+
+  DateTime? get syncedAtAsDateTime {
+    _syncedAtAsDateTime ??= syncedAt != null ? DateTime.parse(syncedAt!) : null;
+    return _syncedAtAsDateTime;
+  }
+
   factory DiscordIntegration.fromJson(Map<String, dynamic> json) =>
       DiscordIntegration(
         id: DiscordSnowflake(json[idEntry] as String),

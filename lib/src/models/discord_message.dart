@@ -309,7 +309,7 @@ class DiscordMessage {
             ? List<DiscordReaction>.from(
                 (json[reactionsEntry]).map(DiscordReaction.fromJson))
             : null,
-        nonce: json[nonceEntry] != null ? json[nonceEntry].toString() : null,
+        nonce: json[nonceEntry] as String?,
         pinned: json[pinnedEntry] as bool,
         webhookId: json[webhookIdEntry] != null
             ? DiscordSnowflake(json[webhookIdEntry] as String)

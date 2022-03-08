@@ -92,6 +92,9 @@ class DiscordChannel {
     this.permissions,
   });
 
+  DiscordChannelType get typeAsEnum =>
+      _typeAsEnum ??= DiscordChannelType.values[type];
+
   DateTime? get lastPinTimestampAsDateTime {
     if (lastPinTimestamp == null) return null;
     _lastPinTimestampAsDateTime ??= DateTime.parse(lastPinTimestamp!);
@@ -100,7 +103,7 @@ class DiscordChannel {
 
   DiscordVideoQualityMode? get videoQualityModeAsEnum {
     if (videoQualityMode == null) return null;
-    _videoQualityModeAsEnum ??=
+    return _videoQualityModeAsEnum ??=
         DiscordVideoQualityMode.values[videoQualityMode!];
   }
 

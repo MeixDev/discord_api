@@ -1,4 +1,3 @@
-import 'package:discord_api/src/models/discord_optional_audit_entry_info.dart';
 import 'package:discord_api/src/models/discord_snowflake.dart';
 
 import 'discord_overwrite.dart';

@@ -16,7 +16,7 @@ class DiscordActivity {
   /// [activity type](https://discord.com/developers/docs/topics/gateway#activity-object-activity-types)
   final int type;
 
-  late final DiscordActivityType _typeAsEnum;
+  late final DiscordActivityType? _typeAsEnum;
 
   /// stream url, is validated when type is 1 (Streaming)
   ///
@@ -123,7 +123,8 @@ class DiscordActivity {
   DateTime? get createdAtAsDateTime =>
       _createdAtAsDateTime ??= DateTime.fromMillisecondsSinceEpoch(createdAt);
 
-  DiscordActivityType get typeAsEnum => DiscordActivityType.values[type];
+  DiscordActivityType get typeAsEnum =>
+      _typeAsEnum ??= DiscordActivityType.values[type];
 
 // TODO: RECOVER FLAGS FROM BITSET IN DISCORD ACTIVITY
 
