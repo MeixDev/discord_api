@@ -1,6 +1,6 @@
 name: discord_api
-description: A pure dart package wrapping the discord API
-version: 0.1.0
+description: A pure dart package wrapping the discord API, including transformers for all its objects.
+version: 0.1.1
 homepage: https://github.com/MeixDev/discord_api
 repository: https://github.com/MeixDev/discord_api
 
