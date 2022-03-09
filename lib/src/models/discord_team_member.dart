@@ -28,8 +28,8 @@ class DiscordTeamMember {
   factory DiscordTeamMember.fromJson(Map<String, dynamic> json) =>
       DiscordTeamMember(
         membershipState: json[membershipStateEntry] as int,
-        permissions: List<String>.from(json[permissionsEntry]),
+        permissions: List<String>.from(json[permissionsEntry] as List<String>),
         teamId: DiscordSnowflake(json[teamIdEntry] as String),
-        user: DiscordUser.fromJson(json[userEntry]),
+        user: DiscordUser.fromJson(json[userEntry] as Map<String, dynamic>),
       );
 }

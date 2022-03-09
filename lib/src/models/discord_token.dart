@@ -40,7 +40,8 @@ class DiscordToken {
         expiresIn: json[expiresInEntry] as int,
         webhook: json[webhookEntry] != null
             ? DiscordTokenWebhook.fromJson(
-                json[webhookEntry] as Map<String, dynamic>)
+                json[webhookEntry] as Map<String, dynamic>,
+              )
             : null,
       );
 

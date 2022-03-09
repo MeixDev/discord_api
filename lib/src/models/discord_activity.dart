@@ -1,13 +1,12 @@
-import 'discord_activity_flag.dart';
-import 'discord_activity_type.dart';
-import 'discord_emoji.dart';
-import 'discord_snowflake.dart';
-
 import 'discord_activity_assets.dart';
 import 'discord_activity_button.dart';
+import 'discord_activity_flag.dart';
 import 'discord_activity_party.dart';
 import 'discord_activity_secrets.dart';
 import 'discord_activity_timestamps.dart';
+import 'discord_activity_type.dart';
+import 'discord_emoji.dart';
+import 'discord_snowflake.dart';
 
 class DiscordActivity {
   /// the activity's name
@@ -145,7 +144,8 @@ class DiscordActivity {
         url: json[urlEntry] as String?,
         createdAt: json[createdAtEntry] as int,
         timestamps: DiscordActivityTimestamps.fromJson(
-            json[timestampsEntry] as Map<String, dynamic>),
+          json[timestampsEntry] as Map<String, dynamic>,
+        ),
         applicationId: json[applicationIdEntry] != null
             ? DiscordSnowflake(json[applicationIdEntry] as String)
             : null,
@@ -156,21 +156,26 @@ class DiscordActivity {
             : null,
         party: json[partyEntry] != null
             ? DiscordActivityParty.fromJson(
-                json[partyEntry] as Map<String, dynamic>)
+                json[partyEntry] as Map<String, dynamic>,
+              )
             : null,
         assets: json[assetsEntry] != null
             ? DiscordActivityAssets.fromJson(
-                json[assetsEntry] as Map<String, dynamic>)
+                json[assetsEntry] as Map<String, dynamic>,
+              )
             : null,
         secrets: json[secretsEntry] != null
             ? DiscordActivitySecrets.fromJson(
-                json[secretsEntry] as Map<String, dynamic>)
+                json[secretsEntry] as Map<String, dynamic>,
+              )
             : null,
         instance: json[instanceEntry] as bool?,
         flags: json[flagsEntry] as int?,
         buttons: json[buttonsEntry] != null
             ? List<DiscordActivityButton>.from(
-                json[buttonsEntry].map(DiscordActivityButton.fromJson))
+                (json[buttonsEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordActivityButton.fromJson),
+              )
             : null,
       );
 }

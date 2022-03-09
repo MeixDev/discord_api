@@ -1,7 +1,6 @@
-import 'package:discord_api/src/models/discord_snowflake.dart';
-
 import 'discord_overwrite.dart';
 import 'discord_role.dart';
+import 'discord_snowflake.dart';
 
 enum DiscordAuditLogChangeKey {
   /// name: afk_channel_id

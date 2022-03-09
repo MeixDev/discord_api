@@ -1,8 +1,7 @@
-import 'package:discord_api/src/models/discord_guild_member.dart';
-
+import 'discord_guild_member.dart';
 import 'discord_message_interaction_type.dart';
-import 'discord_user.dart';
 import 'discord_snowflake.dart';
+import 'discord_user.dart';
 
 class DiscordMessageInteraction {
   /// id of the interaction
@@ -46,7 +45,9 @@ class DiscordMessageInteraction {
         name: json[nameEntry] as String,
         user: DiscordUser.fromJson(json[userEntry] as Map<String, dynamic>),
         member: json[memberEntry] != null
-            ? DiscordGuildMember.fromJson(json[memberEntry])
+            ? DiscordGuildMember.fromJson(
+                json[memberEntry] as Map<String, dynamic>,
+              )
             : null,
       );
 }

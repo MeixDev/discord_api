@@ -37,7 +37,8 @@ class DiscordStageInstance {
     required this.channelId,
     required this.topic,
     required this.privacyLevel,
-    required this.discoverableDisabled,
+    @Deprecated("Use `privacyLevel` instead")
+        required this.discoverableDisabled,
   });
 
   DiscordStagePrivacyLevel get privacyLevelAsEnum {
@@ -52,6 +53,7 @@ class DiscordStageInstance {
         channelId: DiscordSnowflake(json[channelIdEntry] as String),
         topic: json[topicEntry] as String,
         privacyLevel: json[privacyLevelEntry] as int,
+        // ignore: deprecated_member_use_from_same_package
         discoverableDisabled: json[discoverableDisabledEntry] as bool,
       );
 }

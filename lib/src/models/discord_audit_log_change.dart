@@ -1,8 +1,7 @@
-import 'package:discord_api/src/models/discord_audit_log_change_key.dart';
-import 'package:discord_api/src/models/discord_snowflake.dart';
-
+import 'discord_audit_log_change_key.dart';
 import 'discord_overwrite.dart';
 import 'discord_role.dart';
+import 'discord_snowflake.dart';
 
 class DiscordAuditLogChange {
   /// name of the audit log [change key](https://discord.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-key)

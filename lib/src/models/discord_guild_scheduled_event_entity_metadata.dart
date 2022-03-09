@@ -13,7 +13,8 @@ class DiscordGuildScheduledEventEntityMetadata {
   });
 
   factory DiscordGuildScheduledEventEntityMetadata.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       DiscordGuildScheduledEventEntityMetadata(
         location: json[locationEntry] as String?,
       );

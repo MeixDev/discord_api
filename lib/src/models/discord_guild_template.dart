@@ -1,7 +1,6 @@
-import 'package:discord_api/src/models/discord_guild.dart';
-
-import 'discord_user.dart';
+import 'discord_guild.dart';
 import 'discord_snowflake.dart';
+import 'discord_user.dart';
 
 class DiscordGuildTemplate {
   /// the template code (unique ID)

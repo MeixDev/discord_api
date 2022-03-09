@@ -1,6 +1,6 @@
 import 'discord_guild_member.dart';
-import 'discord_user.dart';
 import 'discord_snowflake.dart';
+import 'discord_user.dart';
 
 class DiscordGuildScheduledEventUser {
   /// the scheduled event id which the user subscribed to
@@ -32,7 +32,8 @@ class DiscordGuildScheduledEventUser {
         user: DiscordUser.fromJson(json[userEntry] as Map<String, dynamic>),
         member: json[memberEntry] != null
             ? DiscordGuildMember.fromJson(
-                json[memberEntry] as Map<String, dynamic>)
+                json[memberEntry] as Map<String, dynamic>,
+              )
             : null,
       );
 }

@@ -52,10 +52,10 @@ class DiscordEmoji {
             : null,
         name: json[nameEntry] as String?,
         roles: json[rolesEntry] != null
-            ? List<String>.from(json[rolesEntry])
+            ? List<String>.from(json[rolesEntry] as List<String>)
             : null,
         user: json[userEntry] != null
-            ? DiscordUser.fromJson(json[userEntry])
+            ? DiscordUser.fromJson(json[userEntry] as Map<String, dynamic>)
             : null,
         requireColons: json[requireColonsEntry] as bool?,
         managed: json[managedEntry] as bool?,

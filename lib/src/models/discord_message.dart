@@ -10,8 +10,8 @@ import 'discord_message_flag.dart';
 import 'discord_message_interaction.dart';
 import 'discord_message_reference.dart';
 import 'discord_message_type.dart';
-import 'discord_snowflake.dart';
 import 'discord_reaction.dart';
+import 'discord_snowflake.dart';
 import 'discord_sticker.dart';
 import 'discord_sticker_item.dart';
 import 'discord_user.dart';
@@ -260,7 +260,7 @@ class DiscordMessage {
     this.thread,
     this.components,
     this.stickerItems,
-    this.stickers,
+    @Deprecated("Use stickerItems instead") this.stickers,
   });
 
   DateTime get timestampAsDateTime =>
@@ -298,7 +298,8 @@ class DiscordMessage {
             DiscordUser.fromJson(json[authorIdEntry] as Map<String, dynamic>),
         member: json[memberEntry] != null
             ? DiscordGuildMember.fromJson(
-                json[memberEntry] as Map<String, dynamic>)
+                json[memberEntry] as Map<String, dynamic>,
+              )
             : null,
         content: json[contentEntry] as String,
         timestamp: json[timestampEntry] as String,
@@ -306,17 +307,28 @@ class DiscordMessage {
         tts: json[ttsEntry] as bool,
         mentionEveryone: json[mentionEveryoneEntry] as bool,
         mentions: List<DiscordUser>.from(
-            (json[mentionsEntry]).map(DiscordUser.fromJson)),
-        mentionRoles: List<String>.from(json[mentionRolesEntry]),
+          (json[mentionsEntry] as List<Map<String, dynamic>>)
+              .map(DiscordUser.fromJson),
+        ),
+        mentionRoles:
+            List<String>.from(json[mentionRolesEntry] as List<String>),
         mentionChannels: List<DiscordChannelMention>.from(
-            (json[mentionChannelsEntry]).map(DiscordChannelMention.fromJson)),
+          (json[mentionChannelsEntry] as List<Map<String, dynamic>>)
+              .map(DiscordChannelMention.fromJson),
+        ),
         attachments: List<DiscordAttachment>.from(
-            (json[attachmentsEntry]).map(DiscordAttachment.fromJson)),
+          (json[attachmentsEntry] as List<Map<String, dynamic>>)
+              .map(DiscordAttachment.fromJson),
+        ),
         embeds: List<DiscordEmbed>.from(
-            (json[embedsEntry]).map(DiscordEmbed.fromJson)),
+          (json[embedsEntry] as List<Map<String, dynamic>>)
+              .map(DiscordEmbed.fromJson),
+        ),
         reactions: json[reactionsEntry] != null
             ? List<DiscordReaction>.from(
-                (json[reactionsEntry]).map(DiscordReaction.fromJson))
+                (json[reactionsEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordReaction.fromJson),
+              )
             : null,
         nonce: json[nonceEntry] as String?,
         pinned: json[pinnedEntry] as bool,
@@ -326,45 +338,55 @@ class DiscordMessage {
         type: json[typeEntry] as int,
         activity: json[activityEntry] != null
             ? DiscordMessageActivity.fromJson(
-                json[activityEntry] as Map<String, dynamic>)
+                json[activityEntry] as Map<String, dynamic>,
+              )
             : null,
         application: json[applicationEntry] != null
             ? DiscordApplication.fromJson(
-                json[applicationEntry] as Map<String, dynamic>)
+                json[applicationEntry] as Map<String, dynamic>,
+              )
             : null,
         applicationId: json[applicationIdEntry] != null
             ? DiscordSnowflake(json[applicationIdEntry] as String)
             : null,
         messageReference: json[messageReferenceEntry] != null
             ? DiscordMessageReference.fromJson(
-                json[messageReferenceEntry] as Map<String, dynamic>)
+                json[messageReferenceEntry] as Map<String, dynamic>,
+              )
             : null,
-        isReferencedMessageReturned:
-            json.containsKey(referencedMessageEntry) ? true : false,
+        isReferencedMessageReturned: json.containsKey(referencedMessageEntry),
         flags: json[flagsEntry] as int?,
         referencedMessage: json[referencedMessageEntry] != null
             ? DiscordMessage.fromJson(
-                json[referencedMessageEntry] as Map<String, dynamic>)
+                json[referencedMessageEntry] as Map<String, dynamic>,
+              )
             : null,
         interaction: json[interactionEntry] != null
             ? DiscordMessageInteraction.fromJson(
-                json[interactionEntry] as Map<String, dynamic>)
+                json[interactionEntry] as Map<String, dynamic>,
+              )
             : null,
         thread: json[threadEntry] != null
             ? DiscordChannel.fromJson(json[threadEntry] as Map<String, dynamic>)
             : null,
         components: json[componentsEntry] != null
             ? List<DiscordMessageComponent>.from(
-                (json[componentsEntry]).map(DiscordMessageComponent.fromJson),
+                (json[componentsEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordMessageComponent.fromJson),
               )
             : null,
         stickerItems: json[stickerItemsEntry] != null
             ? List<DiscordStickerItem>.from(
-                (json[stickerItemsEntry]).map(DiscordStickerItem))
+                (json[stickerItemsEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordStickerItem.fromJson),
+              )
             : null,
+        // ignore: deprecated_member_use_from_same_package
         stickers: json[stickersEntry] != null
             ? List<DiscordSticker>.from(
-                (json[stickersEntry]).map(DiscordSticker))
+                (json[stickersEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordSticker.fromJson),
+              )
             : null,
       );
 }

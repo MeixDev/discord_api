@@ -1,7 +1,7 @@
-import 'package:discord_api/src/models/discord_emoji.dart';
-import 'package:discord_api/src/models/discord_guild_feature.dart';
-import 'package:discord_api/src/models/discord_snowflake.dart';
-import 'package:discord_api/src/models/discord_sticker.dart';
+import 'discord_emoji.dart';
+import 'discord_guild_feature.dart';
+import 'discord_snowflake.dart';
+import 'discord_sticker.dart';
 
 class DiscordGuildPreview {
   /// guild id
@@ -76,12 +76,16 @@ class DiscordGuildPreview {
         splash: json[splashEntry] as String?,
         discoverySplash: json[discoverySplashEntry] as String?,
         emojis: List<DiscordEmoji>.from(
-            json[emojisEntry].map(DiscordEmoji.fromJson)),
+          (json[emojisEntry] as List<Map<String, dynamic>>)
+              .map(DiscordEmoji.fromJson),
+        ),
         features: List<String>.from(json[featuresEntry] as List<String>),
         approximateMemberCount: json[approximateMemberCountEntry] as int,
         approximatePresenceCount: json[approximatePresenceCountEntry] as int,
         description: json[descriptionEntry] as String?,
         stickers: List<DiscordSticker>.from(
-            json[stickersEntry].map(DiscordSticker.fromJson)),
+          (json[stickersEntry] as List<Map<String, dynamic>>)
+              .map(DiscordSticker.fromJson),
+        ),
       );
 }

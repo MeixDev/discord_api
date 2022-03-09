@@ -143,12 +143,12 @@ class DiscordApplication {
         termsOfServiceUrl: json[termsOfServiceUrlEntry] as String?,
         privacyPolicyUrl: json[privacyPolicyUrlEntry] as String?,
         owner: json[ownerEntry] != null
-            ? DiscordUser.fromJson(json[ownerEntry])
+            ? DiscordUser.fromJson(json[ownerEntry] as Map<String, dynamic>)
             : null,
         summary: json[summaryEntry] as String,
         verifyKey: json[verifyKeyEntry] as String,
         team: json[teamEntry] != null
-            ? DiscordTeam.fromJson(json[teamEntry])
+            ? DiscordTeam.fromJson(json[teamEntry] as Map<String, dynamic>)
             : null,
         guildId: json[guildIdEntry] != null
             ? DiscordSnowflake(json[guildIdEntry] as String)

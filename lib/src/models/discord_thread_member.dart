@@ -28,8 +28,7 @@ class DiscordThreadMember {
   });
 
   DateTime? get joinTimestampAsDateTime {
-    _joinTimestampAsDateTime ??= DateTime.parse(joinTimestamp);
-    return _joinTimestampAsDateTime;
+    return _joinTimestampAsDateTime ??= DateTime.parse(joinTimestamp);
   }
 
   factory DiscordThreadMember.fromJson(Map<String, dynamic> json) =>

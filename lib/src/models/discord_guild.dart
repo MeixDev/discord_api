@@ -1,19 +1,19 @@
 import 'discord_channel.dart';
 import 'discord_emoji.dart';
-import 'discord_guild_premium_tier.dart';
-import 'discord_guild_scheduled_event.dart';
-import 'discord_mfa_level.dart';
-import 'discord_nsfw_level.dart';
-import 'discord_presence_update.dart';
-import 'discord_stage_instance.dart';
-import 'discord_sticker.dart';
-import 'discord_system_channel_flag.dart';
 import 'discord_explicit_content_filter_level.dart';
 import 'discord_guild_feature.dart';
 import 'discord_guild_member.dart';
+import 'discord_guild_premium_tier.dart';
+import 'discord_guild_scheduled_event.dart';
 import 'discord_message_notifications_level.dart';
+import 'discord_mfa_level.dart';
+import 'discord_nsfw_level.dart';
+import 'discord_presence_update.dart';
 import 'discord_role.dart';
 import 'discord_snowflake.dart';
+import 'discord_stage_instance.dart';
+import 'discord_sticker.dart';
+import 'discord_system_channel_flag.dart';
 import 'discord_verification_level.dart';
 import 'discord_voice_state.dart';
 import 'discord_welcome_screen.dart';
@@ -381,7 +381,7 @@ class DiscordGuild {
     this.owner,
     required this.ownerId,
     this.permissions,
-    this.region,
+    @Deprecated("Use channel.rtc_region instead") this.region,
     this.afkChannelId,
     required this.afkTimeout,
     this.widgetEnabled,
@@ -476,6 +476,7 @@ class DiscordGuild {
         owner: json[ownerEntry] as bool?,
         ownerId: DiscordSnowflake(json[ownerIdEntry] as String),
         permissions: json[permissionsEntry] as String?,
+        // ignore: deprecated_member_use_from_same_package
         region: json[regionEntry] as String,
         afkChannelId: json[afkChannelIdEntry] != null
             ? DiscordSnowflake(json[afkChannelIdEntry] as String)
@@ -490,9 +491,13 @@ class DiscordGuild {
             json[defaultMessageNotificationsEntry] as int,
         explicitContentFilter: json[explicitContentFilterEntry] as int,
         roles: List<DiscordRole>.from(
-            (json[rolesEntry]).map(DiscordRole.fromJson)),
+          (json[rolesEntry] as List<Map<String, dynamic>>)
+              .map(DiscordRole.fromJson),
+        ),
         emojis: List<DiscordEmoji>.from(
-            (json[emojisEntry]).map(DiscordEmoji.fromJson)),
+          (json[emojisEntry] as List<Map<String, dynamic>>)
+              .map(DiscordEmoji.fromJson),
+        ),
         features: List<String>.from(json[featuresEntry] as List<String>),
         mfaLevel: json[mfaLevelEntry] as int,
         applicationId: json[applicationIdEntry] != null
@@ -511,23 +516,33 @@ class DiscordGuild {
         memberCount: json[memberCountEntry] as int?,
         voiceStates: json[voiceStatesEntry] != null
             ? List<DiscordVoiceState>.from(
-                (json[voiceStatesEntry]).map(DiscordVoiceState.fromJson))
+                (json[voiceStatesEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordVoiceState.fromJson),
+              )
             : null,
         members: json[membersEntry] != null
             ? List<DiscordGuildMember>.from(
-                (json[membersEntry]).map(DiscordGuildMember.fromJson))
+                (json[membersEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordGuildMember.fromJson),
+              )
             : null,
         channels: json[channelsEntry] != null
             ? List<DiscordChannel>.from(
-                (json[channelsEntry]).map(DiscordChannel.fromJson))
+                (json[channelsEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordChannel.fromJson),
+              )
             : null,
         threads: json[presencesEntry] != null
             ? List<DiscordChannel>.from(
-                (json[presencesEntry]).map(DiscordChannel.fromJson))
+                (json[presencesEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordChannel.fromJson),
+              )
             : null,
         presences: json[presencesEntry] != null
             ? List<DiscordPresenceUpdate>.from(
-                (json[presencesEntry]).map(DiscordPresenceUpdate.fromJson))
+                (json[presencesEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordPresenceUpdate.fromJson),
+              )
             : null,
         maxPresences: json[maxPresencesEntry] as int?,
         maxMembers: json[maxMembersEntry] as int?,
@@ -545,21 +560,27 @@ class DiscordGuild {
         approximatePresenceCount: json[approximatePresenceCountEntry] as int?,
         welcomeScreen: json[welcomeScreenEntry] != null
             ? DiscordWelcomeScreen.fromJson(
-                json[welcomeScreenEntry] as Map<String, dynamic>)
+                json[welcomeScreenEntry] as Map<String, dynamic>,
+              )
             : null,
         nsfwLevel: json[nsfwLevelEntry] as int,
         stageInstances: json[stageInstancesEntry] != null
             ? List<DiscordStageInstance>.from(
-                (json[stageInstancesEntry]).map(DiscordStageInstance.fromJson))
+                (json[stageInstancesEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordStageInstance.fromJson),
+              )
             : null,
         stickers: json[stickersEntry] != null
             ? List<DiscordSticker>.from(
-                (json[stickersEntry]).map(DiscordSticker.fromJson))
+                (json[stickersEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordSticker.fromJson),
+              )
             : null,
         guildScheduledEvents: json[guildScheduledEventsEntry] != null
             ? List<DiscordGuildScheduledEvent>.from(
-                (json[guildScheduledEventsEntry])
-                    .map(DiscordGuildScheduledEvent.fromJson))
+                (json[guildScheduledEventsEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordGuildScheduledEvent.fromJson),
+              )
             : null,
         premiumProgressBarEnabled: json[premiumProgressBarEnabledEntry] as bool,
       );

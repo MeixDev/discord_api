@@ -14,11 +14,12 @@ class DiscordAuthorizationInformation {
   static const expiresEntry = 'expires';
   static const userEntry = 'user';
 
-  DiscordAuthorizationInformation(
-      {required this.application,
-      required this.scopes,
-      required this.expiresAt,
-      this.user});
+  DiscordAuthorizationInformation({
+    required this.application,
+    required this.scopes,
+    required this.expiresAt,
+    this.user,
+  });
 
   List<DiscordApiScope> get scopesAsEnum => _scopesAsEnum ??= scopes.map((s) {
         final nameSegments = s.split('.');
@@ -28,13 +29,14 @@ class DiscordAuthorizationInformation {
         }
         final dartName = nameSegments.join();
         return DiscordApiScope.values
-            .firstWhere((v) => v.toString() == 'DiscordApiScope.' + dartName);
+            .firstWhere((v) => v.toString() == 'DiscordApiScope.$dartName');
       }).toList();
 
   factory DiscordAuthorizationInformation.fromJson(Map<String, dynamic> json) =>
       DiscordAuthorizationInformation(
         application: DiscordApplication.fromJson(
-            json[applicationEntry] as Map<String, dynamic>),
+          json[applicationEntry] as Map<String, dynamic>,
+        ),
         scopes: List<String>.from(json[scopesEntry] as List<String>),
         expiresAt: DateTime.parse(json[expiresEntry] as String),
         user: json[userEntry] != null

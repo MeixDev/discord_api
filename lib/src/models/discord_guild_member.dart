@@ -90,16 +90,15 @@ class DiscordGuildMember {
   }
 
   DateTime? get premiumSinceAsDateTime {
-    _premiumSinceAsDateTime ??=
+    return _premiumSinceAsDateTime ??=
         premiumSince != null ? DateTime.parse(premiumSince!) : null;
-    return _premiumSinceAsDateTime;
   }
 
   DateTime? get communicationDisabledUntilAsDateTime {
-    _communicationDisabledUntilAsDateTime ??= communicationDisabledUntil != null
-        ? DateTime.parse(communicationDisabledUntil!)
-        : null;
-    return _communicationDisabledUntilAsDateTime;
+    return _communicationDisabledUntilAsDateTime ??=
+        communicationDisabledUntil != null
+            ? DateTime.parse(communicationDisabledUntil!)
+            : null;
   }
 
   factory DiscordGuildMember.fromJson(Map<String, dynamic> json) =>

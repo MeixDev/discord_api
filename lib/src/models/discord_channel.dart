@@ -160,8 +160,7 @@ class DiscordChannel {
 
   DateTime? get lastPinTimestampAsDateTime {
     if (lastPinTimestamp == null) return null;
-    _lastPinTimestampAsDateTime ??= DateTime.parse(lastPinTimestamp!);
-    return _lastPinTimestampAsDateTime;
+    return _lastPinTimestampAsDateTime ??= DateTime.parse(lastPinTimestamp!);
   }
 
   DiscordVideoQualityMode? get videoQualityModeAsEnum {
@@ -179,7 +178,9 @@ class DiscordChannel {
         position: json[positionEntry] as int?,
         permissionOverwrites: json[permissionOverwritesEntry] != null
             ? List<DiscordOverwrite>.from(
-                json[permissionOverwritesEntry].map(DiscordOverwrite.fromJson))
+                (json[permissionOverwritesEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordOverwrite.fromJson),
+              )
             : null,
         name: json[nameEntry] as String?,
         topic: json[topicEntry] as String?,
@@ -192,7 +193,9 @@ class DiscordChannel {
         rateLimitPerUser: json[rateLimitPerUserEntry] as int?,
         recipients: json[recipientsEntry] != null
             ? List<DiscordUser>.from(
-                json[recipientsEntry].map(DiscordUser.fromJson))
+                (json[recipientsEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordUser.fromJson),
+              )
             : null,
         icon: json[iconEntry] as String?,
         ownerId: json[ownerIdEntry] != null
@@ -210,10 +213,14 @@ class DiscordChannel {
         messageCount: json[messageCountEntry] as int?,
         memberCount: json[memberCountEntry] as int?,
         threadMetadata: json[threadMetadataEntry] != null
-            ? DiscordThreadMetadata.fromJson(json[threadMetadataEntry])
+            ? DiscordThreadMetadata.fromJson(
+                json[threadMetadataEntry] as Map<String, dynamic>,
+              )
             : null,
         member: json[memberEntry] != null
-            ? DiscordThreadMember.fromJson(json[memberEntry])
+            ? DiscordThreadMember.fromJson(
+                json[memberEntry] as Map<String, dynamic>,
+              )
             : null,
         defaultAutoArchiveDuration:
             json[defaultAutoArchiveDurationEntry] as int?,

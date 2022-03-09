@@ -68,7 +68,8 @@ enum DiscordGuildFeature {
 }
 
 List<DiscordGuildFeature> discordGuildFeaturesFromValues(
-    List<String> features) {
+  List<String> features,
+) {
   final list = <DiscordGuildFeature>[];
   for (final feature in features) {
     switch (feature) {

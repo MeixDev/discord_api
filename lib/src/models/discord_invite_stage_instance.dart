@@ -1,4 +1,4 @@
-import 'package:discord_api/src/models/discord_guild_member.dart';
+import 'discord_guild_member.dart';
 
 //@Deprecated("This is deprecated")
 class DiscordInviteStageInstance {
@@ -29,7 +29,8 @@ class DiscordInviteStageInstance {
   factory DiscordInviteStageInstance.fromJson(Map<String, dynamic> json) =>
       DiscordInviteStageInstance(
         members: List<DiscordGuildMember>.from(
-          json[membersEntry].map(DiscordGuildMember.fromJson),
+          (json[membersEntry] as List<Map<String, dynamic>>)
+              .map(DiscordGuildMember.fromJson),
         ),
         participantCount: json[participantCountEntry] as int,
         speakerCount: json[speakerCountEntry] as int,

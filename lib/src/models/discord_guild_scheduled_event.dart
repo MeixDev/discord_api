@@ -1,10 +1,9 @@
-import 'package:discord_api/src/models/discord_user.dart';
-
 import 'discord_guild_scheduled_event_entity_metadata.dart';
 import 'discord_guild_scheduled_event_entity_type.dart';
 import 'discord_guild_scheduled_event_privacy_level.dart';
 import 'discord_guild_scheduled_event_status.dart';
 import 'discord_snowflake.dart';
+import 'discord_user.dart';
 
 class DiscordGuildScheduledEvent {
   /// the id of the scheduled event
@@ -155,13 +154,13 @@ class DiscordGuildScheduledEvent {
 
   factory DiscordGuildScheduledEvent.fromJson(Map<String, dynamic> json) =>
       DiscordGuildScheduledEvent(
-        id: DiscordSnowflake(json[idEntry]),
-        guildId: DiscordSnowflake(json[guildIdEntry]),
+        id: DiscordSnowflake(json[idEntry] as String),
+        guildId: DiscordSnowflake(json[guildIdEntry] as String),
         channelId: json[channelIdEntry] != null
-            ? DiscordSnowflake(json[channelIdEntry])
+            ? DiscordSnowflake(json[channelIdEntry] as String)
             : null,
         creatorId: json[creatorIdEntry] != null
-            ? DiscordSnowflake(json[creatorIdEntry])
+            ? DiscordSnowflake(json[creatorIdEntry] as String)
             : null,
         name: json[nameEntry] as String,
         description: json[descriptionEntry] as String?,
@@ -171,11 +170,12 @@ class DiscordGuildScheduledEvent {
         status: json[statusEntry] as int,
         entityType: json[entityTypeEntry] as int,
         entityId: json[entityIdEntry] != null
-            ? DiscordSnowflake(json[entityIdEntry])
+            ? DiscordSnowflake(json[entityIdEntry] as String)
             : null,
         entityMetadata: json[entityMetadataEntry] != null
             ? DiscordGuildScheduledEventEntityMetadata.fromJson(
-                json[entityMetadataEntry] as Map<String, dynamic>)
+                json[entityMetadataEntry] as Map<String, dynamic>,
+              )
             : null,
         creator: json[creatorEntry] != null
             ? DiscordUser.fromJson(json[creatorEntry] as Map<String, dynamic>)

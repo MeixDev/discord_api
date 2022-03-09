@@ -22,16 +22,23 @@ abstract class DiscordMessageComponent {
       _typeAsEnum ??= DiscordMessageComponentType.values[type];
 
   factory DiscordMessageComponent.fromJson(Map<String, dynamic> json) {
-    switch (DiscordMessageComponentType.values[json[typeEntry]]) {
+    switch (DiscordMessageComponentType.values[json[typeEntry] as int]) {
       case DiscordMessageComponentType.actionRow:
-        return DiscordMessageComponentActionRow.fromJson(json[componentsEntry]);
+        return DiscordMessageComponentActionRow.fromJson(
+          json[componentsEntry] as Map<String, dynamic>,
+        );
       case DiscordMessageComponentType.button:
-        return DiscordMessageComponentButton.fromJson(json[componentsEntry]);
+        return DiscordMessageComponentButton.fromJson(
+          json[componentsEntry] as Map<String, dynamic>,
+        );
       case DiscordMessageComponentType.selectMenu:
         return DiscordMessageComponentSelectMenu.fromJson(
-            json[componentsEntry]);
+          json[componentsEntry] as Map<String, dynamic>,
+        );
       case DiscordMessageComponentType.textInput:
-        return DiscordMessageComponentTextInput.fromJson(json[componentsEntry]);
+        return DiscordMessageComponentTextInput.fromJson(
+          json[componentsEntry] as Map<String, dynamic>,
+        );
       default:
         throw Exception('Unknown component type');
     }
@@ -55,10 +62,13 @@ class DiscordMessageComponentActionRow extends DiscordMessageComponent {
   }) : super(type: DiscordMessageComponentType.actionRow.index);
 
   factory DiscordMessageComponentActionRow.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       DiscordMessageComponentActionRow(
         components: List<DiscordMessageComponent>.from(
-            json[componentsEntry].map(DiscordMessageComponent.fromJson)),
+          (json[componentsEntry] as List<Map<String, dynamic>>)
+              .map(DiscordMessageComponent.fromJson),
+        ),
       );
 }
 
@@ -242,11 +252,12 @@ class DiscordMessageComponentSelectMenu extends DiscordMessageComponent {
   }) : super(type: DiscordMessageComponentType.selectMenu.index);
 
   factory DiscordMessageComponentSelectMenu.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       DiscordMessageComponentSelectMenu(
         customId: json[customIdEntry] as String,
         options: List<DiscordMessageComponentSelectMenuOption>.from(
-          (json[optionsEntry]).map(
+          (json[optionsEntry] as List<Map<String, dynamic>>).map(
             DiscordMessageComponentSelectMenuOption.fromJson,
           ),
         ),
@@ -292,7 +303,8 @@ class DiscordMessageComponentSelectMenuOption {
   });
 
   factory DiscordMessageComponentSelectMenuOption.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       DiscordMessageComponentSelectMenuOption(
         label: json[labelEntry] as String,
         value: json[valueEntry] as String,
@@ -375,7 +387,8 @@ class DiscordMessageComponentTextInput extends DiscordMessageComponent {
       _styleAsEnum ??= DiscordMessageComponentTextInputStyle.values[style];
 
   factory DiscordMessageComponentTextInput.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       DiscordMessageComponentTextInput(
         customId: json[customIdEntry] as String,
         style: json[styleEntry] as int,

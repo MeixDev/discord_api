@@ -1,6 +1,6 @@
-import 'package:discord_api/src/models/discord_channel.dart';
-import 'package:discord_api/src/models/discord_snowflake.dart';
-import 'package:discord_api/src/models/discord_user.dart';
+import 'discord_channel.dart';
+import 'discord_snowflake.dart';
+import 'discord_user.dart';
 
 class DiscordGuildWidget {
   /// guild id
@@ -47,11 +47,13 @@ class DiscordGuildWidget {
         name: json[nameEntry] as String,
         instantInvite: json[instantInviteEntry] as String?,
         channels: List<DiscordChannel>.from(
-            (json[channelsEntry] as List<Map<String, dynamic>>)
-                .map(DiscordChannel.fromJson)),
+          (json[channelsEntry] as List<Map<String, dynamic>>)
+              .map(DiscordChannel.fromJson),
+        ),
         members: List<DiscordUser>.from(
-            (json[membersEntry] as List<Map<String, dynamic>>)
-                .map(DiscordUser.fromJson)),
+          (json[membersEntry] as List<Map<String, dynamic>>)
+              .map(DiscordUser.fromJson),
+        ),
         presenceCount: json[presenceCountEntry] as int,
       );
 }

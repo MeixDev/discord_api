@@ -1,5 +1,5 @@
-import 'package:discord_api/src/models/discord_snowflake.dart';
-import 'package:discord_api/src/models/discord_user.dart';
+import 'discord_snowflake.dart';
+import 'discord_user.dart';
 
 class DiscordIntegrationApplication {
   /// the id of the app
@@ -41,12 +41,13 @@ class DiscordIntegrationApplication {
     this.bot,
   });
 
-  factory DiscordIntegrationApplication.fromJson(Map<String, dynamic> json) => DiscordIntegrationApplication._(
-      id: DiscordSnowflake(json[idEntry] as String),
-      name: json[nameEntry] as String,
-      icon: json[iconEntry] as String?,
-      description: json[descriptionEntry] as String,
-      summary: json[summaryEntry] as String,
-      bot: DiscordUser.fromJson(json[botEntry] as Map<String, dynamic>),
-    );
+  factory DiscordIntegrationApplication.fromJson(Map<String, dynamic> json) =>
+      DiscordIntegrationApplication._(
+        id: DiscordSnowflake(json[idEntry] as String),
+        name: json[nameEntry] as String,
+        icon: json[iconEntry] as String?,
+        description: json[descriptionEntry] as String,
+        summary: json[summaryEntry] as String,
+        bot: DiscordUser.fromJson(json[botEntry] as Map<String, dynamic>),
+      );
 }

@@ -1,8 +1,7 @@
-import 'package:discord_api/src/models/discord_sticker_format_type.dart';
-import 'package:discord_api/src/models/discord_sticker_type.dart';
-
-import 'discord_user.dart';
 import 'discord_snowflake.dart';
+import 'discord_sticker_format_type.dart';
+import 'discord_sticker_type.dart';
+import 'discord_user.dart';
 
 /// Represents a sticker that can be sent in messages.
 class DiscordSticker {

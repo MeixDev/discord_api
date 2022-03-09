@@ -52,7 +52,7 @@ class DiscordRole {
         managed: json[managedEntry] as bool?,
         mentionable: json[mentionableEntry] as bool?,
         tags: json[tagsEntry] != null
-            ? DiscordRoleTags.fromJson(json[tagsEntry])
+            ? DiscordRoleTags.fromJson(json[tagsEntry] as Map<String, dynamic>)
             : null,
       );
 }

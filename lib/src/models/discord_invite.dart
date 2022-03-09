@@ -86,7 +86,7 @@ class DiscordInvite {
     required this.approximatePresenceCount,
     required this.approximateMemberCount,
     this.expiresAt,
-    this.stageInstance,
+    @Deprecated("") this.stageInstance,
     this.guildScheduledEvent,
   });
 
@@ -103,7 +103,8 @@ class DiscordInvite {
             : null,
         channel: json[channelEntry] != null
             ? DiscordChannel.fromJson(
-                json[channelEntry] as Map<String, dynamic>)
+                json[channelEntry] as Map<String, dynamic>,
+              )
             : null,
         inviter: json[inviterEntry] != null
             ? DiscordUser.fromJson(json[inviterEntry] as Map<String, dynamic>)
@@ -111,22 +112,27 @@ class DiscordInvite {
         targetType: json[targetTypeEntry] as int?,
         targetUser: json[targetUserEntry] != null
             ? DiscordUser.fromJson(
-                json[targetUserEntry] as Map<String, dynamic>)
+                json[targetUserEntry] as Map<String, dynamic>,
+              )
             : null,
         targetApplication: json[targetApplicationEntry] != null
             ? DiscordApplication.fromJson(
-                json[targetApplicationEntry] as Map<String, dynamic>)
+                json[targetApplicationEntry] as Map<String, dynamic>,
+              )
             : null,
         approximatePresenceCount: json[approximatePresenceCountEntry] as int?,
         approximateMemberCount: json[approximateMemberCountEntry] as int?,
         expiresAt: json[expiresAtEntry] as String?,
+        // ignore: deprecated_member_use_from_same_package
         stageInstance: json[stageInstanceEntry] != null
             ? DiscordInviteStageInstance.fromJson(
-                json[stageInstanceEntry] as Map<String, dynamic>)
+                json[stageInstanceEntry] as Map<String, dynamic>,
+              )
             : null,
         guildScheduledEvent: json[guildScheduledEventEntry] != null
             ? DiscordGuildScheduledEvent.fromJson(
-                json[guildScheduledEventEntry] as Map<String, dynamic>)
+                json[guildScheduledEventEntry] as Map<String, dynamic>,
+              )
             : null,
       );
 }

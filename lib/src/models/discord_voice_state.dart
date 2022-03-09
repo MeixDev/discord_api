@@ -1,5 +1,5 @@
-import 'discord_snowflake.dart';
 import 'discord_guild_member.dart';
+import 'discord_snowflake.dart';
 
 class DiscordVoiceState {
   /// the guild id this voice state is for
@@ -87,9 +87,8 @@ class DiscordVoiceState {
   /// returns the [requestToSpeakTimestamp] as a DateTime
   DateTime? get requestToSpeakTimestampAsDateTime {
     if (requestToSpeakTimestamp == null) return null;
-    _requestToSpeakTimestampAsDateTime ??=
+    return _requestToSpeakTimestampAsDateTime ??=
         DateTime.parse(requestToSpeakTimestamp!);
-    return _requestToSpeakTimestampAsDateTime;
   }
 
   factory DiscordVoiceState.fromJson(Map<String, dynamic> json) =>
@@ -103,7 +102,8 @@ class DiscordVoiceState {
         userId: DiscordSnowflake(json[userIdEntry] as String),
         member: json[memberEntry] != null
             ? DiscordGuildMember.fromJson(
-                json[memberEntry] as Map<String, dynamic>)
+                json[memberEntry] as Map<String, dynamic>,
+              )
             : null,
         sessionId: json[sessionIdEntry] as String,
         deaf: json[deafEntry] as bool,

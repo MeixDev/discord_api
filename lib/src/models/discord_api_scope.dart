@@ -26,9 +26,9 @@ enum DiscordApiScope {
 
 extension DiscordApiScopeModifier on DiscordApiScope {
   String get string {
-    RegExp regExp = RegExp(r'(?<=[a-z])[A-Z]');
+    final RegExp regExp = RegExp('(?<=[a-z])[A-Z]');
     return name
-        .replaceAllMapped(regExp, (match) => ('.${match.group(0)}'))
+        .replaceAllMapped(regExp, (match) => '.${match.group(0)}')
         .toLowerCase();
   }
 }

@@ -1,9 +1,8 @@
-import 'package:discord_api/src/models/discord_snowflake.dart';
-import 'package:discord_api/src/models/discord_user.dart';
-
 import 'discord_activity.dart';
 import 'discord_client_status.dart';
+import 'discord_snowflake.dart';
 import 'discord_status.dart';
+import 'discord_user.dart';
 
 class DiscordPresenceUpdate {
   /// the user presence is being updated for
@@ -46,10 +45,15 @@ class DiscordPresenceUpdate {
 
   factory DiscordPresenceUpdate.fromJson(Map<String, dynamic> json) =>
       DiscordPresenceUpdate(
-        user: DiscordUser.fromJson(json[userEntry]),
+        user: DiscordUser.fromJson(json[userEntry] as Map<String, dynamic>),
         guildId: DiscordSnowflake(json[guildIdEntry] as String),
-        status: json[statusEntry],
-        activites: List<DiscordActivity>.from(json[activitiesEntry]),
-        clientStatus: DiscordClientStatus.fromJson(json[clientStatusEntry]),
+        status: json[statusEntry] as String,
+        activites: List<DiscordActivity>.from(
+          (json[activitiesEntry] as List<Map<String, dynamic>>)
+              .map(DiscordActivity.fromJson),
+        ),
+        clientStatus: DiscordClientStatus.fromJson(
+          json[clientStatusEntry] as Map<String, dynamic>,
+        ),
       );
 }

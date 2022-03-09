@@ -27,11 +27,10 @@ class DiscordRoleTags {
       botId: json[botIdEntry] != null
           ? DiscordSnowflake(json[botIdEntry] as String)
           : null,
-      integrationId: json[integrationIdEntry]
+      integrationId: json[integrationIdEntry] != null
           ? DiscordSnowflake(json[integrationIdEntry] as String)
           : null,
-      premiumSubscriber:
-          json.containsKey(premiumSubscriberEntry) ? true : false,
+      premiumSubscriber: json.containsKey(premiumSubscriberEntry),
     );
   }
 }

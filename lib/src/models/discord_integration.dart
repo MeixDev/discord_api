@@ -1,8 +1,7 @@
-import 'discord_integration_expiration_behavior.dart';
-import 'discord_snowflake.dart';
-
 import 'discord_integration_account.dart';
 import 'discord_integration_application.dart';
+import 'discord_integration_expiration_behavior.dart';
+import 'discord_snowflake.dart';
 import 'discord_user.dart';
 
 class DiscordIntegration {
@@ -141,8 +140,8 @@ class DiscordIntegration {
   }
 
   DateTime? get syncedAtAsDateTime {
-    _syncedAtAsDateTime ??= syncedAt != null ? DateTime.parse(syncedAt!) : null;
-    return _syncedAtAsDateTime;
+    return _syncedAtAsDateTime ??=
+        syncedAt != null ? DateTime.parse(syncedAt!) : null;
   }
 
   factory DiscordIntegration.fromJson(Map<String, dynamic> json) =>
@@ -162,13 +161,15 @@ class DiscordIntegration {
             ? DiscordUser.fromJson(json[userEntry] as Map<String, dynamic>)
             : null,
         account: DiscordIntegrationAccount.fromJson(
-            json[accountEntry] as Map<String, dynamic>),
+          json[accountEntry] as Map<String, dynamic>,
+        ),
         syncedAt: json[syncedAtEntry] as String?,
         subscriberCount: json[subscriberCountEntry] as int?,
         revoked: json[revokedEntry] as bool?,
         application: json[applicationEntry] != null
             ? DiscordIntegrationApplication.fromJson(
-                json[applicationEntry] as Map<String, dynamic>)
+                json[applicationEntry] as Map<String, dynamic>,
+              )
             : null,
       );
 }

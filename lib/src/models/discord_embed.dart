@@ -98,32 +98,39 @@ class DiscordEmbed {
         color: json[colorEntry] as int?,
         footer: json[footerEntry] != null
             ? DiscordEmbedFooter.fromJson(
-                json[footerEntry] as Map<String, dynamic>)
+                json[footerEntry] as Map<String, dynamic>,
+              )
             : null,
         image: json[imageEntry] != null
             ? DiscordEmbedImage.fromJson(
-                json[imageEntry] as Map<String, dynamic>)
+                json[imageEntry] as Map<String, dynamic>,
+              )
             : null,
         thumbnail: json[thumbnailEntry] != null
             ? DiscordEmbedThumbnail.fromJson(
-                json[thumbnailEntry] as Map<String, dynamic>)
+                json[thumbnailEntry] as Map<String, dynamic>,
+              )
             : null,
         video: json[videoEntry] != null
             ? DiscordEmbedVideo.fromJson(
-                json[videoEntry] as Map<String, dynamic>)
+                json[videoEntry] as Map<String, dynamic>,
+              )
             : null,
         provider: json[providerEntry] != null
             ? DiscordEmbedProvider.fromJson(
-                json[providerEntry] as Map<String, dynamic>)
+                json[providerEntry] as Map<String, dynamic>,
+              )
             : null,
         author: json[authorEntry] != null
             ? DiscordEmbedAuthor.fromJson(
-                json[authorEntry] as Map<String, dynamic>)
+                json[authorEntry] as Map<String, dynamic>,
+              )
             : null,
         fields: json[fieldsEntry] != null
             ? List<DiscordEmbedField>.from(
-                json[fieldsEntry]!.map(DiscordEmbedField.fromJson))
+                (json[fieldsEntry]! as List<Map<String, dynamic>>)
+                    .map(DiscordEmbedField.fromJson),
+              )
             : null,
       );
-  //(json[fieldsEntry] as List<dynamic>)?.map((e) => DiscordEmbedField.fromJson(e as Map<String, dynamic>))?.toList()
 }

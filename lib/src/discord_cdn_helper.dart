@@ -1,4 +1,4 @@
-import 'package:discord_api/src/models/discord_image_format.dart';
+import 'models/discord_image_format.dart';
 
 class DiscordCdnHelper {
   static final instance = DiscordCdnHelper._();
@@ -80,7 +80,8 @@ class DiscordCdnHelper {
       return null;
     }
     return getString(
-        '/icons/$guildId/$guildIconHash.${format.fileExtension}?size=$size');
+      '/icons/$guildId/$guildIconHash.${format.fileExtension}?size=$size',
+    );
   }
 
   /// Tries to create the right URL slug for a guild splash, given its guild_id and splash hash,
@@ -97,7 +98,8 @@ class DiscordCdnHelper {
       return null;
     }
     return getString(
-        '/splashes/$guildId/$guildSplashHash.${format.fileExtension}?size=$size');
+      '/splashes/$guildId/$guildSplashHash.${format.fileExtension}?size=$size',
+    );
   }
 
   /// Tries to create the right URL slug for a guild discovery splash, given its guild_id and discovery splash hash,
@@ -114,7 +116,8 @@ class DiscordCdnHelper {
       return null;
     }
     return getString(
-        '/discovery-splashes/$guildId/$guildDiscoverySplashHash.${format.fileExtension}?size=$size');
+      '/discovery-splashes/$guildId/$guildDiscoverySplashHash.${format.fileExtension}?size=$size',
+    );
   }
 
   /// Tries to create the right URL slug for a guild banner, given its guild_id and banner hash,
@@ -131,7 +134,8 @@ class DiscordCdnHelper {
       return null;
     }
     return getString(
-        '/banners/$guildId/$guildBannerHash.${format.fileExtension}?size=$size');
+      '/banners/$guildId/$guildBannerHash.${format.fileExtension}?size=$size',
+    );
   }
 
   /// Tries to create the right URL slug for a user banner, given its user_id and banner hash,
@@ -152,7 +156,8 @@ class DiscordCdnHelper {
       return null;
     }
     return getString(
-        '/banners/$userId/$userBannerHash.${format.fileExtension}?size=$size');
+      '/banners/$userId/$userBannerHash.${format.fileExtension}?size=$size',
+    );
   }
 
   /// Tries to create the right URL slug for the default user avatar of a user,
@@ -185,7 +190,8 @@ class DiscordCdnHelper {
       return null;
     }
     return getString(
-        '/avatars/$userId/$userAvatarHash.${format.fileExtension}?size=$size');
+      '/avatars/$userId/$userAvatarHash.${format.fileExtension}?size=$size',
+    );
   }
 
   /// Tries to create the right URL slug for a guild member avatar, given its guild_id, user_id
@@ -208,7 +214,8 @@ class DiscordCdnHelper {
       return null;
     }
     return getString(
-        '/guilds/$guildId/users/$userId/avatars/$memberAvatarHash.${format.fileExtension}?size=$size');
+      '/guilds/$guildId/users/$userId/avatars/$memberAvatarHash.${format.fileExtension}?size=$size',
+    );
   }
 
   /// Tries to create the right URL slug for an application icon, given its application_id and icon hash,
@@ -225,7 +232,8 @@ class DiscordCdnHelper {
       return null;
     }
     return getString(
-        '/app-icons/$applicationId/$applicationIconHash.${format.fileExtension}?size=$size');
+      '/app-icons/$applicationId/$applicationIconHash.${format.fileExtension}?size=$size',
+    );
   }
 
   /// Tries to create the right URL slug for an application cover, given its application_id and cover image hash,
@@ -242,7 +250,8 @@ class DiscordCdnHelper {
       return null;
     }
     return getString(
-        '/app-icons/$applicationId/$applicationCoverHash.${format.fileExtension}?size=$size');
+      '/app-icons/$applicationId/$applicationCoverHash.${format.fileExtension}?size=$size',
+    );
   }
 
   /// Tries to create the right URL slug for an application asset, given its application_id and asset hash,
@@ -259,7 +268,8 @@ class DiscordCdnHelper {
       return null;
     }
     return getString(
-        '/app-assets/$applicationId/$applicationAssetHash.${format.fileExtension}?size=$size');
+      '/app-assets/$applicationId/$applicationAssetHash.${format.fileExtension}?size=$size',
+    );
   }
 
   /// Tries to create the right URL slug for an application's achievement icon,
@@ -278,7 +288,8 @@ class DiscordCdnHelper {
       return null;
     }
     return getString(
-        '/app-assets/$applicationId/achievements/$achievementId/icons/$achievementIconHash.${format.fileExtension}?size=$size');
+      '/app-assets/$applicationId/achievements/$achievementId/icons/$achievementIconHash.${format.fileExtension}?size=$size',
+    );
   }
 
   /// Tries to create the right URL slug for a sticker pack banner, given its asset_id,
@@ -294,7 +305,8 @@ class DiscordCdnHelper {
       return null;
     }
     return getString(
-        '/app-assets/710982414301790216/store/$stickerPackBannerId.${format.fileExtension}?size=$size');
+      '/app-assets/710982414301790216/store/$stickerPackBannerId.${format.fileExtension}?size=$size',
+    );
   }
 
   /// Tries to create the right URL slug for a team icon, given its team_id and team icon hash,
@@ -311,7 +323,8 @@ class DiscordCdnHelper {
       return null;
     }
     return getString(
-        '/team-icons/$teamId/$teamIconHash.${format.fileExtension}?size=$size');
+      '/team-icons/$teamId/$teamIconHash.${format.fileExtension}?size=$size',
+    );
   }
 
   /// Tries to create the right URL slug for a sticker, given its sticker_id,
@@ -348,7 +361,8 @@ class DiscordCdnHelper {
       return null;
     }
     return getString(
-        '/role-icons/$roleId/$roleIconHash.${format.fileExtension}?size=$size');
+      '/role-icons/$roleId/$roleIconHash.${format.fileExtension}?size=$size',
+    );
   }
 
   /// Tries to create the right URL slug for a guild scheduled event cover,
@@ -366,6 +380,7 @@ class DiscordCdnHelper {
       return null;
     }
     return getString(
-        '/guild-events/$scheduledEventId/$scheduledEventCoverHash.${format.fileExtension}?size=$size');
+      '/guild-events/$scheduledEventId/$scheduledEventCoverHash.${format.fileExtension}?size=$size',
+    );
   }
 }

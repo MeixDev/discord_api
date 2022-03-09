@@ -21,6 +21,8 @@ class DiscordWelcomeScreen {
       DiscordWelcomeScreen(
         description: json[descriptionEntry] as String?,
         welcomeChannels: List<DiscordWelcomeScreenChannel>.from(
-            json[welcomeChannelsEntry].map(DiscordWelcomeScreen.fromJson)),
+          (json[welcomeChannelsEntry] as List<Map<String, dynamic>>)
+              .map(DiscordWelcomeScreen.fromJson),
+        ),
       );
 }

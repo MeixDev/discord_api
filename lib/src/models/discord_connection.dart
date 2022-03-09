@@ -1,6 +1,5 @@
-import 'package:discord_api/src/models/discord_visibility_type.dart';
-
 import 'discord_integration.dart';
+import 'discord_visibility_type.dart';
 
 class DiscordConnection {
   /// id of the connection account
@@ -66,7 +65,8 @@ class DiscordConnection {
         revoked: json[revokedEntry] as bool?,
         integrations: json[integrationsEntry] != null
             ? List<DiscordIntegration>.from(
-                json[integrationsEntry].map(DiscordIntegration.fromJson),
+                (json[integrationsEntry] as List<Map<String, dynamic>>)
+                    .map(DiscordIntegration.fromJson),
               )
             : null,
         verified: json[verifiedEntry] as bool,

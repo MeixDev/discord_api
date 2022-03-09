@@ -115,11 +115,13 @@ class DiscordWebhook {
             : null,
         sourceGuild: json[sourceGuildEntry] != null
             ? DiscordGuild.fromJson(
-                json[sourceGuildEntry] as Map<String, dynamic>)
+                json[sourceGuildEntry] as Map<String, dynamic>,
+              )
             : null,
         sourceChannel: json[sourceChannelEntry] != null
             ? DiscordChannel.fromJson(
-                json[sourceChannelEntry] as Map<String, dynamic>)
+                json[sourceChannelEntry] as Map<String, dynamic>,
+              )
             : null,
         url: json[urlEntry] as String?,
       );

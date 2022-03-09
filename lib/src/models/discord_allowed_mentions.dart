@@ -51,9 +51,9 @@ class DiscordAllowedMentions {
 
   factory DiscordAllowedMentions.fromJson(Map<String, dynamic> json) =>
       DiscordAllowedMentions(
-        parse: List<String>.from(json[parseEntry]),
-        roles: List<String>.from(json[rolesEntry]),
-        users: List<String>.from(json[usersEntry]),
+        parse: List<String>.from(json[parseEntry] as List<String>),
+        roles: List<String>.from(json[rolesEntry] as List<String>),
+        users: List<String>.from(json[usersEntry] as List<String>),
         repliedUser: json[repliedUserEntry] as bool,
       );
 }

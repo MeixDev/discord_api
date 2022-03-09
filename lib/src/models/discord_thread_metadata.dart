@@ -51,14 +51,12 @@ class DiscordThreadMetadata {
   });
 
   DateTime? get archiveTimestampAsDateTime {
-    _archiveTimestampAsDateTime ??= DateTime.parse(archiveTimestamp);
-    return _archiveTimestampAsDateTime;
+    return _archiveTimestampAsDateTime ??= DateTime.parse(archiveTimestamp);
   }
 
   DateTime? get createTimestampAsDateTime {
     if (createTimestamp == null) return null;
-    _createTimestampAsDateTime ??= DateTime.parse(createTimestamp!);
-    return _createTimestampAsDateTime;
+    return _createTimestampAsDateTime ??= DateTime.parse(createTimestamp!);
   }
 
   factory DiscordThreadMetadata.fromJson(Map<String, dynamic> json) =>

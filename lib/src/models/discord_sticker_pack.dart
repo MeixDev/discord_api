@@ -1,6 +1,5 @@
-import 'package:discord_api/src/models/discord_sticker.dart';
-
 import 'discord_snowflake.dart';
+import 'discord_sticker.dart';
 
 class DiscordStickerPack {
   /// id of the sticker pack
@@ -50,7 +49,9 @@ class DiscordStickerPack {
       DiscordStickerPack(
         id: DiscordSnowflake(json[idEntry] as String),
         stickers: List<DiscordSticker>.from(
-            (json[stickersEntry]).map(DiscordSticker.fromJson)),
+          (json[stickersEntry] as List<Map<String, dynamic>>)
+              .map(DiscordSticker.fromJson),
+        ),
         name: json[nameEntry] as String,
         skuId: DiscordSnowflake(json[skuIdEntry] as String),
         coverStickerId: json[coverStickerIdEntry] != null

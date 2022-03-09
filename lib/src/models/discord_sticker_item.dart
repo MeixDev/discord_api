@@ -30,9 +30,9 @@ class DiscordStickerItem {
     return _formatTypeAsEnum!;
   }
 
-  factory DiscordStickerItem.fromMap(Map<String, dynamic> json) =>
+  factory DiscordStickerItem.fromJson(Map<String, dynamic> json) =>
       DiscordStickerItem(
-        id: DiscordSnowflake(json[idEntry]),
+        id: DiscordSnowflake(json[idEntry] as String),
         name: json[nameEntry] as String,
         formatType: json[formatTypeEntry] as int,
       );

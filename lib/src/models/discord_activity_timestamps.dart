@@ -23,14 +23,12 @@ class DiscordActivityTimestamps {
 
   DateTime? get startAsDateTime {
     if (start == null) return null;
-    _startAsDateTime ??= DateTime.fromMillisecondsSinceEpoch(start!);
-    return _startAsDateTime;
+    return _startAsDateTime ??= DateTime.fromMillisecondsSinceEpoch(start!);
   }
 
   DateTime? get endAsDateTime {
     if (end == null) return null;
-    _endAsDateTime ??= DateTime.fromMillisecondsSinceEpoch(end!);
-    return _endAsDateTime;
+    return _endAsDateTime ??= DateTime.fromMillisecondsSinceEpoch(end!);
   }
 
   factory DiscordActivityTimestamps.fromJson(Map<String, dynamic> json) =>

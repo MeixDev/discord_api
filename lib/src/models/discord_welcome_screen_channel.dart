@@ -1,4 +1,4 @@
-import 'package:discord_api/src/models/discord_snowflake.dart';
+import 'discord_snowflake.dart';
 
 class DiscordWelcomeScreenChannel {
   /// the channel's id

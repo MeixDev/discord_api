@@ -1,7 +1,7 @@
 import 'discord_guild_member.dart';
+import 'discord_premium_type.dart';
 import 'discord_snowflake.dart';
 import 'discord_user_flag.dart';
-import 'discord_premium_type.dart';
 
 class DiscordUser {
   ///	the user's id
@@ -150,7 +150,8 @@ class DiscordUser {
         publicFlags: json[publicFlagsEntry] as int?,
         member: json[memberEntry] != null
             ? DiscordGuildMember.fromJson(
-                json[memberEntry] as Map<String, dynamic>)
+                json[memberEntry] as Map<String, dynamic>,
+              )
             : null,
       );
 
