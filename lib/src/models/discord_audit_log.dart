@@ -47,46 +47,23 @@ class DiscordAuditLog {
   factory DiscordAuditLog.fromJson(Map<String, dynamic> json) =>
       DiscordAuditLog(
         auditLogEntries: List<DiscordAuditLogEntry>.from(
-          json[auditLogEntriesEntry].map(
-            (x) => DiscordAuditLogEntry.fromJson(
-              x as Map<String, dynamic>,
-            ),
-          ),
+          json[auditLogEntriesEntry].map(DiscordAuditLogEntry.fromJson),
         ),
         guildScheduledEvents: List<DiscordGuildScheduledEvent>.from(
-          json[guildScheduledEventsEntry].map(
-            (x) => DiscordGuildScheduledEvent.fromJson(
-              x as Map<String, dynamic>,
-            ),
-          ),
+          json[guildScheduledEventsEntry]
+              .map(DiscordGuildScheduledEvent.fromJson),
         ),
         integrations: List<DiscordIntegration>.from(
-          json[integrationsEntry].map(
-            (x) => DiscordIntegration.fromJson(
-              x as Map<String, dynamic>,
-            ),
-          ),
+          json[integrationsEntry].map(DiscordIntegration.fromJson),
         ),
         threads: List<DiscordChannel>.from(
-          json[threadsEntry].map(
-            (x) => DiscordChannel.fromJson(
-              x as Map<String, dynamic>,
-            ),
-          ),
+          json[threadsEntry].map(DiscordChannel.fromJson),
         ),
         users: List<DiscordUser>.from(
-          json[usersEntry].map(
-            (x) => DiscordUser.fromJson(
-              x as Map<String, dynamic>,
-            ),
-          ),
+          json[usersEntry].map(DiscordUser.fromJson),
         ),
         webhooks: List<DiscordWebhook>.from(
-          json[webhooksEntry].map(
-            (x) => DiscordWebhook.fromJson(
-              x as Map<String, dynamic>,
-            ),
-          ),
+          json[webhooksEntry].map(DiscordWebhook.fromJson),
         ),
       );
 }

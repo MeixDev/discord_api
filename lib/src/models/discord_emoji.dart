@@ -1,15 +1,29 @@
 import 'discord_snowflake.dart';
 import 'discord_user.dart';
 
-// TODO: Add Documentation
 class DiscordEmoji {
+  /// [emoji id](https://discord.com/developers/docs/reference#image-formatting)
   final DiscordSnowflake? id;
+
+  /// emoji name
   final String? name;
+
+  /// roles allowed to use this emoji
   final List<String>? roles;
+
+  /// user that created this emoji
   final DiscordUser? user;
+
+  /// whether this emoji must be wrapped in colons
   final bool? requireColons;
+
+  /// whether this emoji is managed
   final bool? managed;
+
+  /// whether this emoji is animated
   final bool? animated;
+
+  /// whether this emoji can be used, may be false due to loss of Server Boosts
   final bool? available;
 
   static const idEntry = 'id';

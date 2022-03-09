@@ -33,11 +33,12 @@ class DiscordAuthorizationInformation {
 
   factory DiscordAuthorizationInformation.fromJson(Map<String, dynamic> json) =>
       DiscordAuthorizationInformation(
-        application: DiscordApplication.fromJson(json[applicationEntry]),
-        scopes: List<String>.from(json[scopesEntry]),
-        expiresAt: DateTime.parse(json[expiresEntry]),
+        application: DiscordApplication.fromJson(
+            json[applicationEntry] as Map<String, dynamic>),
+        scopes: List<String>.from(json[scopesEntry] as List<String>),
+        expiresAt: DateTime.parse(json[expiresEntry] as String),
         user: json[userEntry] != null
-            ? DiscordUser.fromJson(json[userEntry])
+            ? DiscordUser.fromJson(json[userEntry] as Map<String, dynamic>)
             : null,
       );
 }

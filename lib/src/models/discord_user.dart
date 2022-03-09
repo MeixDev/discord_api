@@ -3,32 +3,87 @@ import 'discord_snowflake.dart';
 import 'discord_user_flag.dart';
 import 'discord_premium_type.dart';
 
-// TODO: Add documentation
 class DiscordUser {
+  ///	the user's id
+  ///
+  /// required OAuth2 scope: identify
   final DiscordSnowflake id;
 
+  /// the user's username, not unique across the platform
+  ///
+  /// required OAuth2 scope: identify
   final String username;
+
+  /// the user's 4-digit discord-tag
+  ///
+  /// required OAuth2 scope: identify
   final String discriminator;
 
+  /// the user's [avatar hash](https://discord.com/developers/docs/reference#image-formatting)
+  ///
+  /// required OAuth2 scope: identify
   final String? avatar;
 
+  /// whether the user belongs to an OAuth2 application
+  ///
+  /// required OAuth2 scope: identify
   final bool? bot;
+
+  /// whether the user is an Official Discord System user (part of the urgent system message)
+  ///
+  /// required OAuth2 scope: identify
   final bool? system;
+
+  /// whether the user has two factor enabled on their account
+  ///
+  /// required OAuth2 scope: identify
   final bool? mfaEnabled;
 
+  /// the user's [banner hash](https://discord.com/developers/docs/reference#image-formatting)
+  ///
+  /// required OAuth2 scope: identify
   final String? banner;
+
+  /// the user's banner color encoded as an integer representation of hexadecimal color code
+  ///
+  /// required OAuth2 scope: identify
   final int? accentColor;
 
+  /// the user's chosen [language option](https://discord.com/developers/docs/reference#locales)
+  ///
+  /// required OAuth2 scope: identify
   final String? locale;
 
+  /// whether the email on this account has been verified
+  ///
+  /// required OAuth2 scope: email
   final bool? verified;
+
+  /// the user's email
+  ///
+  /// required OAuth2 scope: email
   final String? email;
 
+  /// the [flags](https://discord.com/developers/docs/resources/user#user-object-user-flags)
+  /// on a user's account
+  ///
+  /// required OAuth2 scope: identify
   final int? flags;
 
+  /// the [type of Nitro subscription](https://discord.com/developers/docs/resources/user#user-object-premium-types)
+  /// on a user's account
+  ///
+  /// required OAuth2 scope: identify
   final int? premiumType;
+
   late final DiscordPremiumType? _premiumTypeAsEnum;
+
+  /// the public [flags](https://discord.com/developers/docs/resources/user#user-object-user-flags)
+  /// on a user's account
+  ///
+  /// required OAuth2 scope: identify
   final int? publicFlags;
+
   late final List<DiscordUserFlag>? _publicFlagsAsEnum;
 
   /// Isn't technically part of the object as per its definition.

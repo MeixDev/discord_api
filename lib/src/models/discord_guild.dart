@@ -116,8 +116,10 @@ class DiscordGuild {
   /// custom guild emojis
   final List<DiscordEmoji> emojis;
 
-  /// enabled guild features
-  final List<DiscordGuildFeature> features;
+  /// enabled guild
+  final List<String> features;
+
+  late final List<DiscordGuildFeature>? _featuresAsEnum;
 
   /// required [MFA level](https://discord.com/developers/docs/resources/guild#guild-object-mfa-level)
   /// for the guild
@@ -439,9 +441,16 @@ class DiscordGuild {
   DiscordMfaLevel get mfaLevelAsEnum =>
       _mfaLevelAsEnum ??= DiscordMfaLevel.values[mfaLevel];
 
-  // TODO: Unbitset the mask and convert them to a List of Enum for usage
-  // List<DiscordSystemChannelFlag> get systemChannelFlagsAsEnum =>
-  //     _systemChannelFlagsAsEnum ??=
+  List<DiscordSystemChannelFlag> get systemChannelFlagsAsEnum {
+    if (_systemChannelFlagsAsEnum != null) return _systemChannelFlagsAsEnum!;
+    _systemChannelFlagsAsEnum = <DiscordSystemChannelFlag>[];
+    for (final k in DiscordSystemChannelFlag.values) {
+      if ((systemChannelFlags & (1 << k.index)) >> k.index == 1) {
+        _systemChannelFlagsAsEnum!.add(k);
+      }
+    }
+    return _systemChannelFlagsAsEnum!;
+  }
 
   DateTime? get joinedAtAsDateTime {
     if (joinedAt == null) return null;
@@ -454,80 +463,8 @@ class DiscordGuild {
   DiscordNsfwLevel get nsfwLevelAsEnum =>
       _nsfwLevelAsEnum ??= DiscordNsfwLevel.values[nsfwLevel];
 
-  static List<DiscordGuildFeature> _createListFromJson(List<String> features) {
-    final list = <DiscordGuildFeature>[];
-    for (final feature in features) {
-      switch (feature) {
-        case "ANIMATED_ICON":
-          list.add(DiscordGuildFeature.animatedIcon);
-          break;
-        case "BANNER":
-          list.add(DiscordGuildFeature.banner);
-          break;
-        case "COMMERCE":
-          list.add(DiscordGuildFeature.commerce);
-          break;
-        case "COMMUNITY":
-          list.add(DiscordGuildFeature.community);
-          break;
-        case "DISCOVERABLE":
-          list.add(DiscordGuildFeature.discoverable);
-          break;
-        case "FEATURABLE":
-          list.add(DiscordGuildFeature.featurable);
-          break;
-        case "INVITE_SPLASH":
-          list.add(DiscordGuildFeature.inviteSplash);
-          break;
-        case "MEMBER_VERIFICATION_GATE_ENABLED":
-          list.add(DiscordGuildFeature.memberVerificationGateEnable);
-          break;
-        case "MONETIZATION_ENABLED":
-          list.add(DiscordGuildFeature.monetizationEnabled);
-          break;
-        case "MORE_STICKERS":
-          list.add(DiscordGuildFeature.moreStickers);
-          break;
-        case "NEWS":
-          list.add(DiscordGuildFeature.news);
-          break;
-        case "PARTNERED":
-          list.add(DiscordGuildFeature.partnered);
-          break;
-        case "PREVIEW_ENABLED":
-          list.add(DiscordGuildFeature.previewEnabled);
-          break;
-        case "PRIVATE_THREADS":
-          list.add(DiscordGuildFeature.privateThreads);
-          break;
-        case "ROLE_ICONS":
-          list.add(DiscordGuildFeature.roleIcons);
-          break;
-        case "SEVEN_DAY_THREAD_ARCHIVE":
-          list.add(DiscordGuildFeature.sevenDayThreadArchive);
-          break;
-        case "THREE_DAY_THREAD_ARCHIVE":
-          list.add(DiscordGuildFeature.threeDayThreadArchive);
-          break;
-        case "TICKETED_EVENTS_ENABLED":
-          list.add(DiscordGuildFeature.ticketedEventsEnabled);
-          break;
-        case "VANITY_URL":
-          list.add(DiscordGuildFeature.vanityUrl);
-          break;
-        case "VERIFIED":
-          list.add(DiscordGuildFeature.verified);
-          break;
-        case "VIP_REGIONS":
-          list.add(DiscordGuildFeature.vipRegions);
-          break;
-        case "WELCOME_SCREEN_ENABLED":
-          list.add(DiscordGuildFeature.welcomeScreenEnabled);
-          break;
-      }
-    }
-    return list;
-  }
+  List<DiscordGuildFeature> get featuresAsEnum =>
+      _featuresAsEnum ??= discordGuildFeaturesFromValues(features);
 
   factory DiscordGuild.fromJson(Map<String, dynamic> json) => DiscordGuild(
         id: DiscordSnowflake(json[idEntry] as String),
@@ -556,7 +493,7 @@ class DiscordGuild {
             (json[rolesEntry]).map(DiscordRole.fromJson)),
         emojis: List<DiscordEmoji>.from(
             (json[emojisEntry]).map(DiscordEmoji.fromJson)),
-        features: _createListFromJson(json[featuresEntry] as List<String>),
+        features: List<String>.from(json[featuresEntry] as List<String>),
         mfaLevel: json[mfaLevelEntry] as int,
         applicationId: json[applicationIdEntry] != null
             ? DiscordSnowflake(json[applicationIdEntry] as String)

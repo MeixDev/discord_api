@@ -274,8 +274,17 @@ class DiscordMessage {
   DiscordMessageType get typeAsEnum =>
       _typeAsEnum ??= DiscordMessageType.values[type];
 
-  // TODO: Recover Message Flags from Bitset
-  // List<DiscordMessageFlag> get flagsAsEnum {}
+  List<DiscordMessageFlag> get flagsAsEnum {
+    if (_flagsAsEnum != null) return _flagsAsEnum!;
+    if (flags == null) return _flagsAsEnum ??= [];
+    _flagsAsEnum = <DiscordMessageFlag>[];
+    for (final k in DiscordMessageFlag.values) {
+      if ((flags! & (1 << k.index)) >> k.index == 1) {
+        _flagsAsEnum!.add(k);
+      }
+    }
+    return _flagsAsEnum!;
+  }
 
   factory DiscordMessage.fromJson(Map<String, dynamic> json) => DiscordMessage(
         id: DiscordSnowflake(json[idEntry] as String),

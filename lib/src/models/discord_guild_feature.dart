@@ -66,3 +66,79 @@ enum DiscordGuildFeature {
   /// guild has enabled the welcome screen
   welcomeScreenEnabled,
 }
+
+List<DiscordGuildFeature> discordGuildFeaturesFromValues(
+    List<String> features) {
+  final list = <DiscordGuildFeature>[];
+  for (final feature in features) {
+    switch (feature) {
+      case "ANIMATED_ICON":
+        list.add(DiscordGuildFeature.animatedIcon);
+        break;
+      case "BANNER":
+        list.add(DiscordGuildFeature.banner);
+        break;
+      case "COMMERCE":
+        list.add(DiscordGuildFeature.commerce);
+        break;
+      case "COMMUNITY":
+        list.add(DiscordGuildFeature.community);
+        break;
+      case "DISCOVERABLE":
+        list.add(DiscordGuildFeature.discoverable);
+        break;
+      case "FEATURABLE":
+        list.add(DiscordGuildFeature.featurable);
+        break;
+      case "INVITE_SPLASH":
+        list.add(DiscordGuildFeature.inviteSplash);
+        break;
+      case "MEMBER_VERIFICATION_GATE_ENABLED":
+        list.add(DiscordGuildFeature.memberVerificationGateEnable);
+        break;
+      case "MONETIZATION_ENABLED":
+        list.add(DiscordGuildFeature.monetizationEnabled);
+        break;
+      case "MORE_STICKERS":
+        list.add(DiscordGuildFeature.moreStickers);
+        break;
+      case "NEWS":
+        list.add(DiscordGuildFeature.news);
+        break;
+      case "PARTNERED":
+        list.add(DiscordGuildFeature.partnered);
+        break;
+      case "PREVIEW_ENABLED":
+        list.add(DiscordGuildFeature.previewEnabled);
+        break;
+      case "PRIVATE_THREADS":
+        list.add(DiscordGuildFeature.privateThreads);
+        break;
+      case "ROLE_ICONS":
+        list.add(DiscordGuildFeature.roleIcons);
+        break;
+      case "SEVEN_DAY_THREAD_ARCHIVE":
+        list.add(DiscordGuildFeature.sevenDayThreadArchive);
+        break;
+      case "THREE_DAY_THREAD_ARCHIVE":
+        list.add(DiscordGuildFeature.threeDayThreadArchive);
+        break;
+      case "TICKETED_EVENTS_ENABLED":
+        list.add(DiscordGuildFeature.ticketedEventsEnabled);
+        break;
+      case "VANITY_URL":
+        list.add(DiscordGuildFeature.vanityUrl);
+        break;
+      case "VERIFIED":
+        list.add(DiscordGuildFeature.verified);
+        break;
+      case "VIP_REGIONS":
+        list.add(DiscordGuildFeature.vipRegions);
+        break;
+      case "WELCOME_SCREEN_ENABLED":
+        list.add(DiscordGuildFeature.welcomeScreenEnabled);
+        break;
+    }
+  }
+  return list;
+}

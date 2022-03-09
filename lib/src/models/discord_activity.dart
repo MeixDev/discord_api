@@ -126,10 +126,17 @@ class DiscordActivity {
   DiscordActivityType get typeAsEnum =>
       _typeAsEnum ??= DiscordActivityType.values[type];
 
-// TODO: RECOVER FLAGS FROM BITSET IN DISCORD ACTIVITY
-
-//  List<DiscordActivityFlag>? get flagsAsEnum =>
-//      _flagsAsEnum ??= DiscordActivityFlag.valuesFromMask(flags);
+  List<DiscordActivityFlag>? get flagsAsEnum {
+    if (_flagsAsEnum != null) return _flagsAsEnum!;
+    if (flags == null) return _flagsAsEnum ??= [];
+    _flagsAsEnum = <DiscordActivityFlag>[];
+    for (final k in DiscordActivityFlag.values) {
+      if ((flags! & (1 << k.index)) >> k.index == 1) {
+        _flagsAsEnum!.add(k);
+      }
+    }
+    return _flagsAsEnum!;
+  }
 
   factory DiscordActivity.fromJson(Map<String, dynamic> json) =>
       DiscordActivity(

@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     ).then((_) {
       if (_discordClient.discordHttpClient.discordToken != null) {
-        print(
+        debugPrint(
             "TOKEN: ${_discordClient.discordHttpClient.discordToken?.accessToken}");
         return _discordClient.discordHttpClient.discordToken;
       }

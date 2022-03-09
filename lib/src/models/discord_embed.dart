@@ -6,21 +6,47 @@ import 'discord_embed_provider.dart';
 import 'discord_embed_thumbnail.dart';
 import 'discord_embed_video.dart';
 
-// TODO: Add Documentation
 class DiscordEmbed {
+  /// title of embed
   final String? title;
+
+  /// [type of embed](https://discord.com/developers/docs/resources/channel#embed-object-embed-types)
+  /// (always "rich" for webhook embeds)
   final String? type;
+
+  /// description of embed
   final String? description;
+
+  /// url of embed
   final String? url;
+
+  /// timestamp of embed content
   final String? timestamp;
+
   late final DateTime? _timestampAsDateTime;
+
+  /// color code of the embed
   final int? color;
+
+  /// footer information
   final DiscordEmbedFooter? footer;
+
+  /// image information
   final DiscordEmbedImage? image;
+
+  /// thumbnail information
   final DiscordEmbedThumbnail? thumbnail;
+
+  /// video information
   final DiscordEmbedVideo? video;
+
+  /// provider information
   final DiscordEmbedProvider? provider;
+
+  /// author information
   final DiscordEmbedAuthor? author;
+
+  /// fields information
   final List<DiscordEmbedField>? fields;
 
   static const titleEntry = 'title';

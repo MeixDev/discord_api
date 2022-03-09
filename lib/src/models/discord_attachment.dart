@@ -1,16 +1,34 @@
 import 'discord_snowflake.dart';
 
-// TODO: Add Documentation
 class DiscordAttachment {
+  /// attachment id
   final DiscordSnowflake id;
+
+  /// name of file attached
   final String filename;
+
+  /// description for the file
   final String? description;
+
+  /// the attachment's [media type](https://en.wikipedia.org/wiki/Media_type)
   final String? contentType;
+
+  /// size of file in bytes
   final int size;
+
+  /// source url of file
   final String url;
+
+  /// a proxied url of file
   final String proxyUrl;
+
+  /// height of file (if image)
   final int? height;
+
+  /// width of file (if image)
   final int? width;
+
+  /// whether this attachment is ephemeral
   final bool? ephemeral;
 
   static const idEntry = 'id';
