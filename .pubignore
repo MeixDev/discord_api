@@ -1,0 +1,10 @@
+# See https://dart.dev/tools/pub/publishing#what-files-are-published
+
+/coverage/*
+/doc/*
+/example/*
+/metrics/*
+/tool/*
+/website/*
+/codecov.yaml
+/dart_dependency_validator.yaml
