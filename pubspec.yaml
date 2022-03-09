@@ -1,8 +1,8 @@
 name: discord_api
 description: A pure dart package wrapping the discord API
 version: 0.1.0
-homepage: https://github.com/MeixDev/discord_api_flutter
-repository: https://github.com/MeixDev/discord_api_flutter
+homepage: https://github.com/MeixDev/discord_api
+repository: https://github.com/MeixDev/discord_api
 
 environment:
   sdk: '>=2.15.0 <3.0.0'

@@ -1,7 +1,7 @@
 # discord_api
 _____
 
-[![Dart](https://github.com/MeixDev/discord_api_flutter/actions/workflows/dart.yml/badge.svg)](https://github.com/MeixDev/discord_api_flutter/actions/workflows/dart.yml)
+[![Dart](https://github.com/MeixDev/discord_api/actions/workflows/dart.yml/badge.svg)](https://github.com/MeixDev/discord_api/actions/workflows/dart.yml)
 [![Pub](https://img.shields.io/pub/v/discord_api?color=blue&logo=dart)](https://pub.dev/packages/discord_api)
 [![style: lint](https://img.shields.io/badge/style-lint-4BC0F5.svg)](https://pub.dev/packages/lint)
 
