@@ -108,7 +108,7 @@ class DiscordGuildMember {
             : null,
         nick: json[nickEntry] as String?,
         avatar: json[avatarEntry] as String?,
-        roles: List<String>.from(json[rolesEntry] as List<String>),
+        roles: List<String>.from(json[rolesEntry] as List<dynamic>),
         joinedAt: json[joinedAtEntry] as String,
         premiumSince: json[premiumSinceEntry] as String?,
         deaf: json[deafEntry] as bool,

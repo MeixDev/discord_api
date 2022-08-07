@@ -172,7 +172,9 @@ class DiscordClient {
         queryParameters: args,
       );
       return List<DiscordGuild>.from(
-        (data as List<Map<String, dynamic>>).map(DiscordGuild.fromJson),
+        (data as List<dynamic>)
+            .cast<Map<String, dynamic>>()
+            .map(DiscordGuild.fromJson),
       );
     } catch (e) {
       throw DiscordApiException(e.toString());
